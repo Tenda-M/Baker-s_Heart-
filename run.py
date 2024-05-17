@@ -24,6 +24,7 @@ SHEET = GSPREAD_CLIENT.open('Baker’s_Heart')
 # this print statement will print out data to the terminal
 #print(data)
 
+######################################################
 #get sales function
 def get_sales_data():
     """
@@ -35,7 +36,28 @@ def get_sales_data():
     
     #declaring local variable
     data_str = input("Enter your data here: ")
-    print(f"The data provided is {data_str}")
+    sales_data = data_str.split(",") # this varible will split the string above to list
+    #calling the validate function inside sales data fuction
+    validate_data(sales_data)
+
+##############
+#get validate data function, to ensure collected data is valid
+def validate_data(values):
+    """
+    Inside the try, 
+    check if values are equal to exactly 6 inputs
+    check if it converts all string values into integers.
+    Raises ValueError if strings cannot be converted into int,
+    or if there aren't exactly 6 values.
+    """
+    try:
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 6 values required, you provided {len(values)}"
+            )
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+
 
 #calling the sales function at the end
 get_sales_data()
