@@ -4,6 +4,7 @@
 
 import gspread #import the entire gspread library
 from google.oauth2.service_account import Credentials # imports the Credentials class, which is part of the service_account  function from the Google auth library.  
+from pprint import pprint
 
 #"SCOPE" constant variable , in pathon they are in capital
 SCOPE = [
@@ -24,7 +25,7 @@ SHEET = GSPREAD_CLIENT.open('Baker’s_Heart')
 # this print statement will print out data to the terminal
 #print(data)
 
-######################################################
+####################################
 #get sales function
 def get_sales_data():
     """
@@ -51,7 +52,7 @@ def get_sales_data():
 
     return sales_data
 
-##############
+###################################
 #get validate data function, to ensure collected data is valid
 def validate_data(values):
     """
@@ -80,8 +81,8 @@ def validate_data(values):
     and exit the loop.
     """
 
-#####################
-# sales function
+################################
+#sales function
 def update_sales_worksheet(data):
     """
     Update sales worksheet, add new row with the list data provided
@@ -91,9 +92,40 @@ def update_sales_worksheet(data):
     sales_worksheet.append_row(data)
     print("Sales worksheet updated successfully.\n")
     
-    
-#calling the sales function at the end
-data = get_sales_data()
-#print(data)
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
+###############################
+# function to calculate the surplus data,  
+def calculate_surplus_data(sales_row):
+    """
+    Compare sales with stock and calculate the surplus for each item type.
+
+    The surplus is defined as the sales figure subtracted from the stock:
+    - Positive surplus indicates waste
+    - Negative surplus indicates extra made when stock was sold out.
+    """
+    print("Calculating surplus data...\n")
+    stock = SHEET.worksheet("stock").get_all_values()
+    """
+    defined variable,to get the last line of  numbers from our stock worksheet here.
+    """
+    #pprint(stock)
+    stock_row = stock[-1]
+    print(stock_row)
+
+##############################    
+#mains functions, with function calls at the end
+def main():
+    """
+    Run all program functions
+    """
+    data = get_sales_data()
+    #print(data)
+    sales_data = [int(num) for num in data]
+    update_sales_worksheet(sales_data)
+    calculate_surplus_data(sales_data)
+
+print("Welcome to Baker's Heart Data Automation")
+"""
+this print  statement is the first thing we see,  
+before the functions inside the main function are called. 
+"""
+main()
