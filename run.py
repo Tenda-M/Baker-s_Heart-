@@ -30,15 +30,22 @@ def get_sales_data():
     """
     Get sales figures input from the user.
     """
-    print("Please enter sales data from the last market.")
-    print("Data should be six numbers, separated by commas.")
-    print("Example: 10,20,30,40,50,60\n") #"\n" gives spave for next line
+    while True:
+        print("Please enter sales data from the last market.")
+        print("Data should be six numbers, separated by commas.")
+        print("Example: 10,20,30,40,50,60\n") #"\n" gives spave for next line
     
-    #declaring local variable
-    data_str = input("Enter your data here: ")
-    sales_data = data_str.split(",") # this varible will split the string above to list
+        #declaring local variable
+        data_str = input("Enter your data here: ")
+        sales_data = data_str.split(",") # this varible will split the string above to list
     #calling the validate function inside sales data fuction
-    validate_data(sales_data)
+    #validate_data(sales_data)
+
+        if validate_data(sales_data):
+            print("Data is valid!")
+            break #break to end the while loop
+
+    return sales_data
 
 ##############
 #get validate data function, to ensure collected data is valid
@@ -59,6 +66,9 @@ def validate_data(values):
             )
     except ValueError as e:
         print(f"Invalid data: {e}, please try again.\n")
+        return False #return to end the while loop
+
+    return True # adding this at the end of the validate_data function, ensures that the function correctly informs the calling code (get_sales_data) when the data is valid. This allows the get_sales_data function to print "Data is valid!" and exit the loop.
 
 #calling the sales function at the end
-get_sales_data()
+data = get_sales_data()
