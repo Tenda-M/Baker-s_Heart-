@@ -4,7 +4,7 @@
 
 import gspread #import the entire gspread library
 from google.oauth2.service_account import Credentials # imports the Credentials class, which is part of the service_account  function from the Google auth library.  
-from pprint import pprint
+
 
 #"SCOPE" constant variable , in pathon they are in capital
 SCOPE = [
@@ -41,7 +41,7 @@ def get_sales_data():
         print("Example: 10,20,30,40,50,60\n") #"\n" gives spave for next line
     
         #declaring local variable
-        data_str = input("Enter your data here: ")
+        data_str = input("Enter your data here:\n")
         sales_data = data_str.split(",") # this varible will split the string above to list
     #calling the validate function inside sales data fuction
     #validate_data(sales_data)
