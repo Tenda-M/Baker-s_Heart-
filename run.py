@@ -156,6 +156,23 @@ def calculate_surplus_data(sales_row):
 
     return surplus_data
 
+############################
+#function to   get the last 5 records for each sandwich.  
+def get_last_5_entries_sales():
+    """
+    Collects columns of data from sales worksheet, collecting
+    the last 5 entries for each sandwich and returns the data
+    as a list of lists.
+    """
+    sales = SHEET.worksheet("sales")
+
+    columns = []
+    for ind in range(1, 7):
+        column = sales.col_values(ind)
+        columns.append(column[-5:])
+
+    return columns
+
 ##############################    
 #mains functions, with function calls at the end
 def main():
@@ -168,9 +185,11 @@ def main():
     new_surplus_data = calculate_surplus_data(sales_data)
     update_worksheet(new_surplus_data, "surplus")
 
+
 print("Welcome to Baker's Heart Data Automation")
 """
 this print  statement is the first thing we see,  
 before the functions inside the main function are called. 
 """
-main()
+#main()
+sales_columns = get_last_5_entries_sales()
