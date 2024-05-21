@@ -19,13 +19,53 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Baker’s_Heart')
 
+#######################################################
+
+def print_bakers_heart_log():
+    """
+    Run opening screen for user and gives brief explanation of its use.
+    # ASCII creation redit: patorjk.com
+    """
+    print("\n")
+    # Fore and Style options are colorama properties to give the text colours
+    logo = r"""
+    ************************************************************************************************************************************************************************************************
+                                                                                                                                                                                                
+    8 888888888o          .8.          8 8888     ,88' 8 8888888888   8 888888888o.     d888888o.             8 8888        8 8 8888888888            .8.          8 888888888o. 8888888 8888888888 
+    8 8888    `88.       .888.         8 8888    ,88'  8 8888         8 8888    `88.  .`8888:' `88.           8 8888        8 8 8888                 .888.         8 8888    `88.      8 8888       
+    8 8888     `88      :88888.        8 8888   ,88'   8 8888         8 8888     `88  8.`8888.   Y8           8 8888        8 8 8888                :88888.        8 8888     `88      8 8888       
+    8 8888     ,88     . `88888.       8 8888  ,88'    8 8888         8 8888     ,88  `8.`8888.               8 8888        8 8 8888               . `88888.       8 8888     ,88      8 8888       
+    8 8888.   ,88'    .8. `88888.      8 8888 ,88'     8 888888888888 8 8888.   ,88'   `8.`8888.              8 8888        8 8 888888888888      .8. `88888.      8 8888.   ,88'      8 8888       
+    8 8888888888     .8`8. `88888.     8 8888 88'      8 8888         8 888888888P'     `8.`8888.             8 8888        8 8 8888             .8`8. `88888.     8 888888888P'       8 8888       
+    8 8888    `88.  .8' `8. `88888.    8 888888<       8 8888         8 8888`8b          `8.`8888.            8 8888888888888 8 8888            .8' `8. `88888.    8 8888`8b           8 8888       
+    8 8888      88 .8'   `8. `88888.   8 8888 `Y8.     8 8888         8 8888 `8b.    8b   `8.`8888.           8 8888        8 8 8888           .8'   `8. `88888.   8 8888 `8b.         8 8888       
+    8 8888    ,88'.888888888. `88888.  8 8888   `Y8.   8 8888         8 8888   `8b.  `8b.  ;8.`8888           8 8888        8 8 8888          .888888888. `88888.  8 8888   `8b.       8 8888       
+    8 888888888P .8'       `8. `88888. 8 8888     `Y8. 8 888888888888 8 8888     `88. `Y8888P ,88P'           8 8888        8 8 888888888888 .8'       `8. `88888. 8 8888     `88.     8 8888       
+
+    ************************************************************************************************************************************************************************************************
+
+    """
+
+    print("\n")
+    print(" Sales & Inventory Management "
+          "for Baker's Heart.\n")
+   # time.sleep(1)
+    print("(Created for Educational Purposes -"
+          " Copyright: Tatenda Mudehwe 'May 2024)")
+    #time.sleep(3)
+    #clearScreen()
+    print (logo)
+
+###################################################
+
 #sales = SHEET.worksheet('sales')
 #this is to pull all values from the sales worksheet
 #data = sales.get_all_values()
 # this print statement will print out data to the terminal
 #print(data)
-
-####################################
+##########################################################
+##############.  SALES MENU.  ##################
+##########################################################
 #get sales function
 def get_sales_data():
     """
@@ -191,7 +231,9 @@ def calculate_stock_data(data):
 
     return new_stock_data
 
-
+#######################################################
+################ INVENTORY MANU #################
+#######################################################
 ##############################    
 #mains functions, with function calls at the end
 def main():
@@ -214,5 +256,10 @@ print("Welcome to Baker's Heart Data Automation")
 this print  statement is the first thing we see,  
 before the functions inside the main function are called. 
 """
+
+
+# Call main two functions
+print_bakers_heart_log()
 main()
+
 
