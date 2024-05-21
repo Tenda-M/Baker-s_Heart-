@@ -53,7 +53,7 @@ def print_bakers_heart_logo():
     print("(Created for Educational Purposes -" " Copyright: Tatenda Mudehwe 'May 2024)")
     #time.sleep(3)
     #clearScreen()
-    print (logo)
+    print (logo_lines)
 
 ###################################################
 
