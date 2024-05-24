@@ -5,6 +5,11 @@
 import gspread #import the entire gspread library
 from google.oauth2.service_account import Credentials # imports the Credentials class, which is part of the service_account  function from the Google auth library.  
 
+#import two libraries: time and sys, to improve the display of text on the screen by adding a typing effect/delay.
+import time,sys
+
+# import the os library, that will clear screen
+import os
 
 #"SCOPE" constant variable , in pathon they are in capital
 SCOPE = [
@@ -18,9 +23,40 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Baker’s_Heart')
-
+#######################################################
+    ###########WELCOME SCREEN ############
 #######################################################
 
+#Function to improve the display of text on the screen by adding a typing effect/delay.
+"""
+Credit: https://www.101computing.net/python-typing-text-effect/
+"""
+def typingPrint(text):
+  for character in text:
+    sys.stdout.write(character)
+    sys.stdout.flush()
+    time.sleep(0.05)
+  
+
+def typingInput(text):
+  for character in text:
+    sys.stdout.write(character)
+    sys.stdout.flush()
+    time.sleep(0.05)
+  value = input()  
+  return value
+
+
+# Function used to clear the screen from previous outputs and inputs.
+# Credit: https://www.101computing.net/python-typing-text-effect/
+def clearScreen():
+    """
+    This function will be use to clear the ASCII 
+    """
+    os.system("clear")
+
+
+# Function the print logo ASCII
 def print_bakers_heart_logo():
     """
     Run opening screen for user and gives brief explanation of its use.
@@ -61,8 +97,8 @@ def print_bakers_heart_logo():
     print(" Sales & Inventory Management " "for Baker's Heart.\n")
    # time.sleep(1)
     print("(Created for Educational Purposes -" " Copyright: Tatenda Mudehwe 'May 2024)")
-    #time.sleep(3)
-    #clearScreen()
+    time.sleep(3)
+    clearScreen()
     #print (logo_lines)
 
 ###################################################
