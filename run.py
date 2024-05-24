@@ -115,6 +115,29 @@ def print_bakers_heart_logo():
 ##########################################################
     ###########.  SALES MENU .##############
 ##########################################################
+# FUnction for sales menu
+def sales_menu():
+    """
+    Display the Sales Menu and handle user choices.
+    """
+    while True:
+        print("\nSales Menu\n")
+        print("1. View Sales")
+        print("2. Add Sales")
+        print("3. Back to Main Menu\n")
+
+        sales_choice = input("Enter your choice (1, 2, or 3):\n")
+        if sales_choice == '1':
+            view_sales()
+        elif sales_choice == '2':
+            data = get_sales_data()
+            update_worksheet(data, "sales")
+        elif sales_choice == '3':
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
+
 #get sales function
 def get_sales_data():
     """
@@ -319,20 +342,39 @@ def calculate_stock_data(data):
     ##########. Main MANU .#################
 #######################################################
   
-#mains functions, with function calls at the end
+#Mains functions, with function calls at the end
 def main():
     """
     This the main Menu that will display after the ASCCI disappears and give user
     options to select
     """
-    print("This is Baker's Heart Data Automation. \n")
-    time.sleep(1)
-    typingPrint("Please choose from the Menu below.\n")
-    time.sleep(1)
-    print("\n")
-    print("1. Sales Menu\n")
-    print("2. Ingredients Inventory\n")
-    print("4. Exit\n")
+    while True:
+        print("This is Baker's Heart Data Automation. \n")
+        time.sleep(1)
+        typingPrint("Please choose from the Menu below.\n")
+        time.sleep(1)
+        print("\n")
+        print("1. Sales Menu\n")
+        print("2. Ingredients Inventory\n")
+        print("3. Exit\n")
+
+        choice = input("Enter your choice (1, 2, or 3):\n")
+        if choice == '1':
+            # Call the sales menu or related functions
+            print("Sales Menu selected.")
+            sales_menu()
+            # Example: data = get_sales_data()
+            # Example: update_worksheet(data, "sales")
+        elif choice == '2':
+            # Call the ingredients inventory menu or related functions
+            print("Ingredients Inventory selected.")
+            # Example: inventory_data = get_inventory_data()
+            # Example: update_worksheet(inventory_data, "inventory")
+        elif choice == '3':
+            print("Exiting program. Goodbye!")
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
 
 
 # Call main two functions
