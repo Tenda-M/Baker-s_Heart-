@@ -6,7 +6,10 @@ import gspread #import the entire gspread library
 from google.oauth2.service_account import Credentials # imports the Credentials class, which is part of the service_account  function from the Google auth library.  
 
 #import two libraries: time and sys, to improve the display of text on the screen by adding a typing effect/delay.
-import time,sys
+import time
+
+# Import sys for sys.stdout.write
+import sys 
 
 # import the os library, that will clear screen
 import os
@@ -24,7 +27,7 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('Baker’s_Heart')
 #######################################################
-    ###########WELCOME SCREEN ############
+    ###########. WELCOME SCREEN .############
 #######################################################
 
 #Function to improve the display of text on the screen by adding a typing effect/delay.
@@ -63,8 +66,11 @@ def print_bakers_heart_logo():
      Prints the specified logo for Baker's Heart.
     ASCII creation redit: patorjk.com
     """
+    print("Welcome to Baker's Heart Data Automation")
+
     print("\n")
     # List of lines that make up the ASCII art logo
+    #Credit: https://ascii.today/
     logo_lines = [
     
         "888888b.            888                       d8b         ",
@@ -92,16 +98,14 @@ def print_bakers_heart_logo():
     for line in logo_lines:
         print(line)
 
-
     print("\n")
     print(" Sales & Inventory Management " "for Baker's Heart.\n")
-   # time.sleep(1)
+ 
     print("(Created for Educational Purposes -" " Copyright: Tatenda Mudehwe 'May 2024)")
-    time.sleep(3)
+    time.sleep(5)
     clearScreen()
     #print (logo_lines)
 
-###################################################
 
 #sales = SHEET.worksheet('sales')
 #this is to pull all values from the sales worksheet
@@ -109,7 +113,7 @@ def print_bakers_heart_logo():
 # this print statement will print out data to the terminal
 #print(data)
 ##########################################################
-##############.  SALES MENU.  ##################
+    ###########.  SALES MENU .##############
 ##########################################################
 #get sales function
 def get_sales_data():
@@ -193,7 +197,34 @@ def validate_data(values):
     surplus_worksheet.append_row(data)
     print("Surplus worksheet updated successfully.\n")
     """
+
+
+#mains functions, with function calls at the end
+def main():
+    """
+    Run all program functions
+    
+    data = get_sales_data()
+    sales_data = [int(num) for num in data]
+    update_worksheet(sales_data, "sales")
+    new_surplus_data = calculate_surplus_data(sales_data)
+    update_worksheet(new_surplus_data, "surplus")
+    sales_columns = get_last_5_entries_sales()
+    stock_data = calculate_stock_data(sales_columns)
+    update_worksheet(stock_data, "stock")
+
+#print("Welcome to Baker's Heart Data Automation")
+#this print  statement is the first thing we see, before the functions inside the main function are called. 
+
+
+
+# Call main two functions
+print_bakers_heart_logo()
+main()"""
+    
 #########################################################################
+#end of repeated code
+########################################################################
 
 ###############################
 def update_worksheet(data, worksheet):
@@ -277,30 +308,31 @@ def calculate_stock_data(data):
     return new_stock_data
 
 #######################################################
-################ INVENTORY MANU #################
+    ##########. INVENTORY MENU SCREEN .############
 #######################################################
-##############################    
+
+#######################################################
+    ##########. EXIT MENU SCREEN .############
+#######################################################
+
+#######################################################
+    ##########. Main MANU .#################
+#######################################################
+  
 #mains functions, with function calls at the end
 def main():
     """
-    Run all program functions
+    This the main Menu that will display after the ASCCI disappears and give user
+    options to select
     """
-    data = get_sales_data()
-    sales_data = [int(num) for num in data]
-    update_worksheet(sales_data, "sales")
-    new_surplus_data = calculate_surplus_data(sales_data)
-    update_worksheet(new_surplus_data, "surplus")
-    sales_columns = get_last_5_entries_sales()
-    stock_data = calculate_stock_data(sales_columns)
-    update_worksheet(stock_data, "stock")
-    
-
-
-print("Welcome to Baker's Heart Data Automation")
-"""
-this print  statement is the first thing we see,  
-before the functions inside the main function are called. 
-"""
+    print("This is Baker's Heart Data Automation. \n")
+    time.sleep(1)
+    typingPrint("Please choose from the Menu below.\n")
+    time.sleep(1)
+    print("\n")
+    print("1. Sales Menu\n")
+    print("2. Ingredients Inventory\n")
+    print("4. Exit\n")
 
 
 # Call main two functions
