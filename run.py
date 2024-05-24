@@ -115,7 +115,7 @@ def print_bakers_heart_logo():
 ##########################################################
     ###########.  SALES MENU .##############
 ##########################################################
-# FUnction for sales menu
+# Function for sales menu
 def sales_menu():
     """
     Display the Sales Menu and handle user choices.
@@ -333,6 +333,28 @@ def calculate_stock_data(data):
 #######################################################
     ##########. INVENTORY MENU SCREEN .############
 #######################################################
+# FUnction for sales menu
+def inventory_menu():
+    """
+    Display the Inventory Menu and handle user choices.
+    """
+    while True:
+        print("\nInventory Menu\n")
+        print("1. View Inventory")
+        print("2. Add Inventory")
+        print("3. Back to Main Menu\n")
+
+        sales_choice = input("Enter your choice (1, 2, or 3):\n")
+        if sales_choice == '1':
+            view_1nventory()
+        elif sales_choice == '2':
+            data = get_inventory_data()
+            update_worksheet(data, "sales")
+        elif sales_choice == '3':
+            break
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+
 
 #######################################################
     ##########. EXIT MENU SCREEN .############
@@ -368,6 +390,7 @@ def main():
         elif choice == '2':
             # Call the ingredients inventory menu or related functions
             print("Ingredients Inventory selected.")
+            inventory_menu()
             # Example: inventory_data = get_inventory_data()
             # Example: update_worksheet(inventory_data, "inventory")
         elif choice == '3':
