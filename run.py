@@ -376,6 +376,7 @@ def view_inventory():
     input("Press Enter to return to the Inventory Menu...")
     clearScreen()  # Clear the screen when a choice is made
 
+#Function to manage inventory
 def manage_inventory():
     """
     Display options to manage inventory: Add, Delete, Update, or Return to Inventory Menu.
@@ -402,6 +403,32 @@ def manage_inventory():
             print("Invalid choice. Please enter 1, 2, 3, or 4.")
             input("Press Enter to continue...")
 
+
+#Function to add ingredients
+
+def add_new_ingredient():
+    """
+    Add a new ingredient to the inventory.
+    """
+    while True:
+        clearScreen()  # Clear the screen when a choice is made
+        print("Please add new ingredient\n")
+        name = input("Enter name of the new ingredient... eg coco(g):\n")
+        quantity = input("Enter the quantity of the new ingredient:\n")
+
+        # Append the new ingredient to the inventory sheet
+        inventory_sheet = SHEET.worksheet("inventory")
+        inventory_sheet.append_row([name, quantity])
+
+        print(f"Ingredient '{name}' with quantity '{quantity}' added successfully.\n")
+        choice = input("Would you like to add another ingredient?. Type y if YES and n for NO(y/n):\n")
+        if choice.lower() != 'y':
+            break
+
+    clearScreen()  # Clear the screen when a choice is made
+
+    input("Press Enter to return to Manage Inventory...")
+    clearScreen()  # Clear the screen when a choice is made
 
 #######################################################
     ##########. EXIT SCREEN .############
