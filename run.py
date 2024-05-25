@@ -127,6 +127,7 @@ def sales_menu():
         print("3. Back to Main Menu\n")
 
         sales_choice = input("Enter your choice (1, 2, or 3):\n")
+        clearScreen()# Clear the screen when a choice is made
         if sales_choice == '1':
             view_sales()
         elif sales_choice == '2':
@@ -344,13 +345,14 @@ def inventory_menu():
         print("2. Add Inventory")
         print("3. Back to Main Menu\n")
 
-        sales_choice = input("Enter your choice (1, 2, or 3):\n")
-        if sales_choice == '1':
-            view_1nventory()
-        elif sales_choice == '2':
+        inventory_choice = input("Enter your choice (1, 2, or 3):\n")
+        clearScreen()# Clear the screen when a choice is made
+        if inventory_choice == '1':
+            view_inventory()
+        elif inventory_choice == '2':
             data = get_inventory_data()
             update_worksheet(data, "sales")
-        elif sales_choice == '3':
+        elif inventory_choice == '3':
             break
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
@@ -417,13 +419,16 @@ def main():
         elif choice == '3':
             print("Exiting program. Goodbye!")
             print_goodbye_logo()
+            time.sleep(5)  # Wait for 5 seconds
+            clearScreen()
             break
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
 
-
-# Call main two functions
-print_bakers_heart_logo()
-main()
+# Main loop to restart the program
+while True:
+    # Call main two functions
+    print_bakers_heart_logo()
+    main()
 
 
