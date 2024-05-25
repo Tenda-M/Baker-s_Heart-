@@ -381,18 +381,15 @@ def main():
         print("3. Exit\n")
 
         choice = input("Enter your choice (1, 2, or 3):\n")
+        clearScreen()# Clear the screen when a choice is made
         if choice == '1':
             # Call the sales menu or related functions
             print("Sales Menu selected.")
             sales_menu()
-            # Example: data = get_sales_data()
-            # Example: update_worksheet(data, "sales")
         elif choice == '2':
             # Call the ingredients inventory menu or related functions
             print("Ingredients Inventory selected.")
             inventory_menu()
-            # Example: inventory_data = get_inventory_data()
-            # Example: update_worksheet(inventory_data, "inventory")
         elif choice == '3':
             print("Exiting program. Goodbye!")
             break
