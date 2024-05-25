@@ -421,7 +421,10 @@ def add_new_ingredient():
         inventory_sheet.append_row([name, quantity])
 
         print(f"Ingredient '{name}' with quantity '{quantity}' added successfully.\n")
-        choice = input("Would you like to add another ingredient?. Type y if YES and n for NO(y/n):\n")
+        print("\nUpdated Inventory List:")
+        view_inventory()
+        
+        choice = input("Would you like to add another ingredient?. Type y if YES and n for NO:\n")
         if choice.lower() != 'y':
             break
 
@@ -429,6 +432,42 @@ def add_new_ingredient():
 
     input("Press Enter to return to Manage Inventory...")
     clearScreen()  # Clear the screen when a choice is made
+
+
+#function to delete ingredient
+def delete_ingredient():
+    """
+    Delete an ingredient from the inventory list.
+    """
+    while True:
+        clearScreen()
+        print("Delete Ingredient\n")
+        ingredient_name = input("Enter the name of the ingredient to delete:\n")
+
+        # Find the ingredient in the inventory sheet and delete the row
+        inventory_sheet = SHEET.worksheet("inventory")
+        ingredients = inventory_sheet.get_all_values()
+
+        # Credit: https://stackoverflow.com/questions/21714400/enumerate-on-specific-items-of-a-list
+        for idx, ingredient in enumerate(ingredients):
+            # first convert to str, to ensure that the code handles both numbers and words properly,
+            if str(ingredient[0]).lower() == ingredient_name.lower():
+                inventory_sheet.delete_rows(idx + 1)
+                print(f"Ingredient '{ingredient_name}' deleted successfully.")
+                break
+        else:
+            print(f"Ingredient '{ingredient_name}' not found.")
+        
+       # print("\nUpdated Inventory List:")
+        #view_inventory()
+
+        choice = input("Would you like to delete another ingredient? Type 'y' for YES and 'n' for NO:\n")
+        if choice.lower() != 'y':
+            break
+
+    clearScreen()  # Clear the screen when a choice is made
+
+
 
 #######################################################
     ##########. EXIT SCREEN .############
