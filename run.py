@@ -458,14 +458,59 @@ def delete_ingredient():
         else:
             print(f"Ingredient '{ingredient_name}' not found.")
         
-       # print("\nUpdated Inventory List:")
-        #view_inventory()
+        print("\nUpdated Inventory List:")
+        view_inventory()
 
         choice = input("Would you like to delete another ingredient? Type 'y' for YES and 'n' for NO:\n")
         if choice.lower() != 'y':
             break
 
     clearScreen()  # Clear the screen when a choice is made
+
+
+#Function to update ingredient liest
+def update_ingredient():
+    """
+    Update an ingredient's name or quantity.
+    """
+    while True:
+        clearScreen()
+        print("Update Ingredient\n")
+        ingredient_name = input("Enter the name of the ingredient to update:\n")
+
+        # Find the ingredient in the inventory sheet
+        inventory_sheet = SHEET.worksheet("inventory")
+        ingredients = inventory_sheet.get_all_values()
+
+        for idx, ingredient in enumerate(ingredients):
+            if str(ingredient[0]).strip().lower() == str(ingredient_name).strip().lower():
+                print(f"Current name: {ingredient[0]}, Current quantity: {ingredient[1]}")
+                new_name = input("Enter new name (leave blank to keep current name):\n")
+                new_quantity = input("Enter new quantity (leave blank to keep current quantity):\n")
+
+                if new_name:
+                    ingredient[0] = new_name
+                if new_quantity:
+                    ingredient[1] = new_quantity
+
+                inventory_sheet.update(range_name=f'A{idx + 1}:B{idx + 1}', values=[ingredient])
+                print(f"Ingredient '{ingredient_name}' updated successfully.")
+                break
+        else:
+            print(f"Ingredient '{ingredient_name}' not found.")
+            input("Press Enter to continue...")
+
+        print("\nUpdated Inventory List:")
+        view_inventory()
+
+        choice = input("Would you like to update another ingredient? Type 'y' for YES and 'n' for NO:\n")
+        if choice.lower() != 'y':
+            break
+
+    input("Press Enter to return to Manage Inventory...")
+    clearScreen()  # Clear the screen when a choice is made
+
+
 
 
 
