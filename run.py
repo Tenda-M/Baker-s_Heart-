@@ -357,8 +357,32 @@ def inventory_menu():
 
 
 #######################################################
-    ##########. EXIT MENU SCREEN .############
+    ##########. EXIT SCREEN .############
 #######################################################
+
+def print_goodbye_logo():
+    """
+    Prints a goodbye ASCII art logo.
+    """
+    print("\n")
+    # List of lines that make up the ASCII art logo
+    #Credit: https://ascii.today/
+    goodbye_logo = """
+     .d8888b.                         888 888                        
+    d88P  Y88b                        888 888                        
+    888    888                        888 888                        
+    888         .d88b.   .d88b.   .d88888 88888b.  888  888  .d88b.  
+    888  88888 d88""88b d88""88b d88" 888 888 "88b 888  888 d8P  Y8b 
+    888    888 888  888 888  888 888  888 888  888 888  888 88888888 
+    Y88b  d88P Y88..88P Y88..88P Y88b 888 888 d88P Y88b 888 Y8b.     
+     "Y8888P88  "Y88P"   "Y88P"   "Y88888 88888P"   "Y88888  "Y8888  
+                                                    888          
+                                               Y8b d88P          
+                                                "Y88P"          
+    """
+
+    print(goodbye_logo)
+    print("\n")
 
 #######################################################
     ##########. Main MANU .#################
@@ -392,6 +416,7 @@ def main():
             inventory_menu()
         elif choice == '3':
             print("Exiting program. Goodbye!")
+            print_goodbye_logo()
             break
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
