@@ -151,6 +151,27 @@ def sales_menu():
             print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
             input("Press Enter to continue...")
 
+# Function to view sales
+def view_sales():
+    """
+    View sales data.
+    """
+    clearScreen()
+    print("Viewing sales data...\n")
+    sales = SHEET.worksheet("sales").get_all_values()
+
+    # Convert the sales data to a DataFrame for better display
+    sales_df = pd.DataFrame(sales[1:], columns=sales[0])
+    
+    # Adjust the width of columns for better display
+    pd.set_option('display.max_columns', None)  # Show all columns
+    pd.set_option('display.max_colwidth', 20)   # Set column width
+
+    print(tabulate(sales_df, headers='keys', tablefmt='grid', showindex=False))
+
+    input("Press Enter to return to the Sales Menu...")
+    clearScreen()  # Clear the screen when a choice is made
+
 
 #Function to get stock 
 def view_stock_data():
@@ -167,6 +188,11 @@ def view_stock_data():
 
     # Convert the stock data to a DataFrame for better display
     stock_df = pd.DataFrame(stock[1:], columns=stock[0])
+    
+    # Adjust the width of columns for better display
+    pd.set_option('display.max_columns', None)  # Show all columns
+    pd.set_option('display.max_colwidth', 20)   # Set column width
+
     print(tabulate(stock_df, headers='keys', tablefmt='grid', showindex=False))
 
     input("Press Enter to return to the Sales Menu...")
