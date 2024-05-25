@@ -14,6 +14,8 @@ import sys
 # import the os library, that will clear screen
 import os
 
+# Import the tabulate library
+from tabulate import tabulate  
 #"SCOPE" constant variable , in pathon they are in capital
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -356,6 +358,21 @@ def inventory_menu():
             break
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
+
+#Function for inventory list
+def view_inventory():
+    """
+    Display current inventory List
+    """
+    clearScreen()
+    print("Viewing inventory data...\n")
+    inventory = SHEET.worksheet("inventory").get_all_values()
+    # Print the inventory data in a table format
+    # Credit: https://stackoverflow.com/questions/71389140/python-tablulate-headers-and-grid-lines
+    print(tabulate(inventory, headers="firstrow", tablefmt="grid"))
+    #for row in inventory:
+    #    print(row)
+    input("Press Enter to return to the Inventory Menu...")
 
 
 #######################################################
