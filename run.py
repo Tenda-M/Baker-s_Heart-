@@ -344,7 +344,7 @@ def inventory_menu():
     while True:
         print("\nInventory Menu\n")
         print("1. View Inventory")
-        print("2. Add Inventory")
+        print("2. Manage Inventory")
         print("3. Back to Main Menu\n")
 
         inventory_choice = input("Enter your choice (1, 2, or 3):\n")
@@ -352,12 +352,13 @@ def inventory_menu():
         if inventory_choice == '1':
             view_inventory()
         elif inventory_choice == '2':
-            data = get_inventory_data()
-            update_worksheet(data, "sales")
+            manage_inventory()
+            #update_worksheet(data, "sales")
         elif inventory_choice == '3':
             break
         else:
             print("Invalid choice. Please enter 1, 2, or 3.")
+
 
 #Function for inventory list
 def view_inventory():
@@ -373,6 +374,33 @@ def view_inventory():
     #for row in inventory:
     #    print(row)
     input("Press Enter to return to the Inventory Menu...")
+    clearScreen()  # Clear the screen when a choice is made
+
+def manage_inventory():
+    """
+    Display options to manage inventory: Add, Delete, Update, or Return to Inventory Menu.
+    """
+    while True:
+        clearScreen()
+        print("\nManage Inventory\n")
+        print("1. Add New Ingredient")
+        print("2. Delete Ingredient")
+        print("3. Update Ingredient Name or Quantity")
+        print("4. Return to Inventory Menu\n")
+
+        manage_choice = input("Enter your choice (1, 2, 3, or 4):\n")
+        clearScreen()  # Clear the screen when a choice is made
+        if manage_choice == '1':
+            add_new_ingredient()
+        elif manage_choice == '2':
+            delete_ingredient()
+        elif manage_choice == '3':
+            update_ingredient()
+        elif manage_choice == '4':
+             break  # Return to Inventory Menu
+        else:
+            print("Invalid choice. Please enter 1, 2, 3, or 4.")
+            input("Press Enter to continue...")
 
 
 #######################################################
