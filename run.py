@@ -14,6 +14,9 @@ import sys
 # import the os library, that will clear screen
 import os
 
+# Import the pandas library
+import pandas as pd  
+
 # Import the tabulate library
 from tabulate import tabulate  
 #"SCOPE" constant variable , in pathon they are in capital
@@ -161,10 +164,14 @@ def view_stock_data():
     clearScreen()
     print("Viewing stock data...\n")
     stock = SHEET.worksheet("stock").get_all_values()
-    # Print the stock data in a table format
-    print(tabulate(stock, headers="firstrow", tablefmt="grid"))
+
+    # Convert the stock data to a DataFrame for better display
+    stock_df = pd.DataFrame(stock[1:], columns=stock[0])
+    print(tabulate(stock_df, headers='keys', tablefmt='grid', showindex=False))
+
     input("Press Enter to return to the Sales Menu...")
     clearScreen()  # Clear the screen when a choice is made
+
 
 ###################################
 #get validate data function, to ensure collected data is valid
