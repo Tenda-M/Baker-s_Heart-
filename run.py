@@ -149,8 +149,8 @@ def sales_menu():
             input("Press Enter to continue...")
 
 
-#get sales function
-def get_sales_data():
+#Function to get stock 
+def view_stock_data():
     """
     Get sales figures input from the user.
 
@@ -158,22 +158,13 @@ def get_sales_data():
     via the terminal, which must be a string of 6 numbers separated
     by commas. The loop will repeatedly request data, until it is valid.
     """
-    while True: # loop to request valid data
-        print("Please enter sales data from the last market.")
-        print("Data should be six numbers, separated by commas.")
-        print("Example: 10,20,30,40,50,60\n") #"\n" gives spave for next line
-    
-        #declaring local variable
-        data_str = input("Enter your data here:\n")
-        sales_data = data_str.split(",") # this varible will split the string above to list
-    #calling the validate function inside sales data fuction
-    #validate_data(sales_data)
-
-        if validate_data(sales_data):
-            print("Data is valid!")
-            break #break to end the while loop
-
-    return sales_data
+    clearScreen()
+    print("Viewing stock data...\n")
+    stock = SHEET.worksheet("stock").get_all_values()
+    # Print the stock data in a table format
+    print(tabulate(stock, headers="firstrow", tablefmt="grid"))
+    input("Press Enter to return to the Sales Menu...")
+    clearScreen()  # Clear the screen when a choice is made
 
 ###################################
 #get validate data function, to ensure collected data is valid
