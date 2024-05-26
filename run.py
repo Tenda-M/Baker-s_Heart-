@@ -128,7 +128,7 @@ def sales_menu():
     while True:
         clearScreen()
         print("\nSales Menu\n")
-        print("1. View Sales Data")
+        print("1. View and Add Sales Data")
         print("2. Add Day's Sales")
         print("3. View Stock Data")
         print("4. View Sales vs Stock")
@@ -151,26 +151,106 @@ def sales_menu():
             print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
             input("Press Enter to continue...")
 
-# Function to view sales
+# Function to view sales and edit
 def view_sales():
     """
-    View sales data.
+    View and manage sales data.
     """
-    clearScreen()
-    print("Viewing sales data...\n")
-    sales = SHEET.worksheet("sales").get_all_values()
+    while True:
+        clearScreen()
+        print("\nSales Data Menu\n")
+        print("1. View Sales Data")
+        print("2. Add Sales Data")
+        print("3. Return to Sales Menu\n")
 
-    # Convert the sales data to a DataFrame for better display
-    sales_df = pd.DataFrame(sales[1:], columns=sales[0])
-    
-    # Adjust the width of columns for better display
-    pd.set_option('display.max_columns', None)  # Show all columns
-    pd.set_option('display.max_colwidth', 20)   # Set column width
+        sales_choice = input("Enter your choice (1, 2, or 3):\n")
+        clearScreen()  # Clear the screen when a choice is made
 
-    print(tabulate(sales_df, headers='keys', tablefmt='grid', showindex=False))
+        if sales_choice == '1':
+            print("Viewing sales data...\n")
+            sales = SHEET.worksheet("sales").get_all_values()
 
-    input("Press Enter to return to the Sales Menu...")
-    clearScreen()  # Clear the screen when a choice is made
+            # Convert the sales data to a DataFrame for better display
+            sales_df = pd.DataFrame(sales[1:], columns=sales[0])
+            
+            # Adjust the width of columns for better display
+            pd.set_option('display.max_columns', None)  # Show all columns
+            pd.set_option('display.max_colwidth', 20)   # Set column width
+
+            print(tabulate(sales_df, headers='keys', tablefmt='grid', showindex=False))
+
+            choice = input("\nWould you like to add sales data? Type 'y' for YES and 'n' to return to the Sales Data Menu:\n")
+            if choice.lower() == 'y':
+                clearScreen()
+                print("Adding new sales data...\n")
+                data = get_sales_data()
+                update_worksheet(data, "sales")
+                input("Sales data added successfully. Press Enter to return to the Sales Data Menu...")
+                clearScreen()  # Clear the screen when a choice is made
+
+        elif sales_choice == '2':
+            print("Adding new sales data...\n")
+            data = get_sales_data()
+            update_worksheet(data, "sales")
+            input("Sales data added successfully. Press Enter to return to the Sales Data Menu...")
+            clearScreen()  # Clear the screen when a choice is made
+
+        elif sales_choice == '3':
+            break
+
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+            input("Press Enter to continue...")
+            clearScreen()  # Clear the screen when a choice is made
+
+
+#Function to get sales data
+def get_sales_data():
+    """
+    Get sales figures input from the user.
+
+    Run a while loop to collect a valid string of data from the user
+    via the terminal, which must be a string of 5 numbers followed by a date
+    separated by commas. The loop will repeatedly request data, until it is valid.
+    """
+    while True:  # loop to request valid data
+        print("Please enter sales data from the last market.")
+        print("Data should be five numbers followed by a date (dd/mm/yyyy), separated by commas.")
+        print("Example: 10,20,30,40,50,01/01/2024\n")  # "\n" gives space for next line
+
+        # declaring local variable
+        data_str = input("Enter your data here:\n")
+        sales_data = data_str.split(",")  # this variable will split the string above to list
+
+        if validate_sales_data(sales_data):
+            print("Data is valid!")
+            break  # break to end the while loop
+
+    return sales_data
+
+#Function
+def validate_sales_data(values):
+    """
+    Inside the try,
+    check if the first 5 values are integers and the last value is a valid date.
+    Raises ValueError if strings cannot be converted into int,
+    if there aren't exactly 6 values, or if the last value is not a valid date.
+    """
+    import datetime
+
+    try:
+        [int(value) for value in values[:-1]]  # Validate the first 5 values as integers
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 5 numbers and 1 date required, you provided {len(values)} values."
+            )
+        # Validate the last value as a date
+        datetime.datetime.strptime(values[-1], '%d/%m/%Y')
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False  # return to end the while loop
+
+    return True
 
 
 #Function to get stock 
@@ -199,6 +279,45 @@ def view_stock_data():
     clearScreen()  # Clear the screen when a choice is made
 
 
+# Function to view sales and stock
+def view_sales_vs_stock():
+    """
+    View sales vs stock data.
+    """
+    """
+    clearScreen()
+    print("Viewing sales vs stock data...\n")
+    sales = SHEET.worksheet("sales").get_all_values()
+    stock = SHEET.worksheet("stock").get_all_values()
+
+    # Calculate surplus data
+    surplus_data = []
+    headers = sales[0] + ["Surplus"]
+    for sales_row, stock_row in zip(sales[1:], stock[1:]):
+        surplus = []
+        for stock, sale in zip(stock_row, sales_row):
+            try:
+                surplus_value = int(stock) - int(sale)
+                surplus.append(str(surplus_value))
+            except ValueError:
+                surplus.append("N/A")  # Handle non-integer values
+        surplus_data.append(sales_row + surplus)
+
+    # Ensure the headers length matches the data length
+    headers = sales[0] + ["Surplus"]
+
+    # Convert the surplus data to a DataFrame for better display
+    surplus_df = pd.DataFrame(surplus_data, columns=headers)
+    
+    # Adjust the width of columns for better display
+    pd.set_option('display.max_columns', None)  # Show all columns
+    pd.set_option('display.max_colwidth', 20)   # Set column width
+
+    print(tabulate(surplus_df, headers='keys', tablefmt='grid', showindex=False))
+
+    input("Press Enter to return to the Sales Menu...")
+    clearScreen()  # Clear the screen when a choice is made
+"""
 ###################################
 #get validate data function, to ensure collected data is valid
 def validate_data(values):
@@ -209,6 +328,7 @@ def validate_data(values):
     Raises ValueError if strings cannot be converted into int,
     or if there aren't exactly 6 values.
     """
+    """ 
     #print(values)
     try:
         [int(value) for value in values]
@@ -221,6 +341,7 @@ def validate_data(values):
         return False #return to end the while loop
 
     return True # 
+    """
     """
     adding this return true at the end of the validate_data function, 
     ensures that the function correctly informs the calling code (get_sales_data) 
@@ -258,7 +379,7 @@ def validate_data(values):
 
 
 #mains functions, with function calls at the end
-def main():
+#def main():
     """
     Run all program functions
     
