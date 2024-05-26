@@ -305,6 +305,53 @@ def view_stock_data():
             input("Press Enter to continue...")
             clearScreen()  # Clear the screen when a choice is made
 
+#Function to get stock data
+def get_stock_data():
+    """
+    Get stock figures input from the user.
+
+    Run a while loop to collect a valid string of data from the user
+    via the terminal, which must be a string of 5 numbers followed by a date
+    separated by commas. The loop will repeatedly request data, until it is valid.
+    """
+    while True:  # loop to request valid data
+        print("Please enter stock data.")
+        print("Data should be five numbers followed by a date (dd/mm/yyyy), separated by commas.")
+        print("Example: 100,200,300,400,500,01/01/2024\n")  # "\n" gives space for next line
+
+        # declaring local variable
+        data_str = input("Enter your data here:\n")
+        stock_data = data_str.split(",")  # this variable will split the string above to list
+
+        if validate_stock_data(stock_data):
+            print("Data is valid!")
+            break  # break to end the while loop
+
+    return stock_data
+
+
+#Function to validate data
+def validate_stock_data(values):
+    """
+    Inside the try,
+    check if the first 5 values are integers and the last value is a valid date.
+    Raises ValueError if strings cannot be converted into int,
+    if there aren't exactly 6 values, or if the last value is not a valid date.
+    """
+    import datetime
+    try:
+        [int(value) for value in values[:-1]]  # Validate the first 5 values as integers
+        if len(values) != 6:
+            raise ValueError(
+                f"Exactly 5 numbers and 1 date required, you provided {len(values)} values."
+            )
+        # Validate the last value as a date
+        datetime.datetime.strptime(values[-1], '%d/%m/%Y')
+    except ValueError as e:
+        print(f"Invalid data: {e}, please try again.\n")
+        return False  # return to end the while loop
+
+    return True
 
 # Function to view sales and stock
 def view_sales_vs_stock():
