@@ -128,27 +128,23 @@ def sales_menu():
     while True:
         clearScreen()
         print("\nSales Menu\n")
-        print("1. View and Add Sales Data")
-        print("2. Add Day's Sales")
-        print("3. View  and Add Stock Data")
-        print("4. View Sales vs Stock")
-        print("5. Back to Main Menu\n")
+        print("1. View Sales Data")
+        print("2. View Stock Data")
+        print("3. View Sales vs Stock")
+        print("4. Back to Main Menu\n")
 
-        sales_choice = input("Enter your choice (1, 2, 3, 4, or 5):\n")
+        sales_choice = input("Enter your choice (1, 2, 3, or 4):\n")
         clearScreen()  # Clear the screen when a choice is made
         if sales_choice == '1':
             view_sales()
         elif sales_choice == '2':
-            data = get_sales_data()
-            update_worksheet(data, "sales")
-        elif sales_choice == '3':
             view_stock_data()
-        elif sales_choice == '4':
+        elif sales_choice == '3':
             view_sales_vs_stock()
-        elif sales_choice == '5':
+        elif sales_choice == '4':
             break
         else:
-            print("Invalid choice. Please enter 1, 2, 3, 4, or 5.")
+            print("Invalid choice. Please enter 1, 2, 3, or 4.")
             input("Press Enter to continue...")
 
 # Function to view sales and edit
