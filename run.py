@@ -130,7 +130,7 @@ def sales_menu():
         print("\nSales Menu\n")
         print("1. View and Add Sales Data")
         print("2. Add Day's Sales")
-        print("3. View Stock Data")
+        print("3. View  and Add Stock Data")
         print("4. View Sales vs Stock")
         print("5. Back to Main Menu\n")
 
@@ -253,30 +253,57 @@ def validate_sales_data(values):
     return True
 
 
-#Function to get stock 
+#Function to view stock 
 def view_stock_data():
     """
-    Get sales figures input from the user.
-
-    Run a while loop to collect a valid string of data from the user
-    via the terminal, which must be a string of 6 numbers separated
-    by commas. The loop will repeatedly request data, until it is valid.
+    View and manage stock data.
     """
-    clearScreen()
-    print("Viewing stock data...\n")
-    stock = SHEET.worksheet("stock").get_all_values()
+    while True:
+        clearScreen()
+        print("\nStock Data Menu\n")
+        print("1. View Stock Data")
+        print("2. Add Stock Data")
+        print("3. Return to Sales Menu\n")
 
-    # Convert the stock data to a DataFrame for better display
-    stock_df = pd.DataFrame(stock[1:], columns=stock[0])
-    
-    # Adjust the width of columns for better display
-    pd.set_option('display.max_columns', None)  # Show all columns
-    pd.set_option('display.max_colwidth', 20)   # Set column width
+        stock_choice = input("Enter your choice (1, 2, or 3):\n")
+        clearScreen()  # Clear the screen when a choice is made
 
-    print(tabulate(stock_df, headers='keys', tablefmt='grid', showindex=False))
+        if stock_choice == '1':
+            print("Viewing stock data...\n")
+            stock = SHEET.worksheet("stock").get_all_values()
 
-    input("Press Enter to return to the Sales Menu...")
-    clearScreen()  # Clear the screen when a choice is made
+            # Convert the stock data to a DataFrame for better display
+            stock_df = pd.DataFrame(stock[1:], columns=stock[0])
+            
+            # Adjust the width of columns for better display
+            pd.set_option('display.max_columns', None)  # Show all columns
+            pd.set_option('display.max_colwidth', 20)   # Set column width
+
+            print(tabulate(stock_df, headers='keys', tablefmt='grid', showindex=False))
+
+            choice = input("\nWould you like to add stock data? Type 'y' for YES and 'n' to return to the Stock Data Menu:\n")
+            if choice.lower() == 'y':
+                clearScreen()
+                print("Adding new stock data...\n")
+                data = get_stock_data()
+                update_worksheet(data, "stock")
+                input("Stock data added successfully. Press Enter to return to the Stock Data Menu...")
+                clearScreen()  # Clear the screen when a choice is made
+
+        elif stock_choice == '2':
+            print("Adding new stock data...\n")
+            data = get_stock_data()
+            update_worksheet(data, "stock")
+            input("Stock data added successfully. Press Enter to return to the Stock Data Menu...")
+            clearScreen()  # Clear the screen when a choice is made
+
+        elif stock_choice == '3':
+            break
+
+        else:
+            print("Invalid choice. Please enter 1, 2, or 3.")
+            input("Press Enter to continue...")
+            clearScreen()  # Clear the screen when a choice is made
 
 
 # Function to view sales and stock
