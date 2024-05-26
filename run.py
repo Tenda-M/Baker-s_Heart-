@@ -389,91 +389,6 @@ def view_sales_vs_stock():
     clearScreen()  # Clear the screen when a choice is made
 """
 ###################################
-#get validate data function, to ensure collected data is valid
-def validate_data(values):
-    """
-    Inside the try, 
-    check if values are equal to exactly 6 inputs
-    check if it converts all string values into integers.
-    Raises ValueError if strings cannot be converted into int,
-    or if there aren't exactly 6 values.
-    """
-    """ 
-    #print(values)
-    try:
-        [int(value) for value in values]
-        if len(values) != 6:
-            raise ValueError(
-                f"Exactly 6 values required, you provided {len(values)}"
-            )
-    except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False #return to end the while loop
-
-    return True # 
-    """
-    """
-    adding this return true at the end of the validate_data function, 
-    ensures that the function correctly informs the calling code (get_sales_data) 
-    when the data is valid. This allows the get_sales_data function to print "Data is valid!" 
-    and exit the loop.
-    """
-
-##########################################################################
-#comment out repeated code
-################################
-#update sales function,  inserts data into our spreadsheet.  
-#def update_sales_worksheet(data):
-    """
-    Update sales worksheet, add new row with the list data provided
-    """
-    """print("Updating sales worksheet...\n")
-    sales_worksheet = SHEET.worksheet("sales")
-    sales_worksheet.append_row(data)
-    print("Sales worksheet updated successfully.\n")
-    """
-
-
-################################
-# function to update the surplus worksheet
-#def update_surplus_worksheet(data):
-    """
-    Update surplus worksheet, add new row with the list data provided
-    """
-    """
-    print("Updating surplus worksheet...\n")
-    surplus_worksheet = SHEET.worksheet("surplus")
-    surplus_worksheet.append_row(data)
-    print("Surplus worksheet updated successfully.\n")
-    """
-
-
-#mains functions, with function calls at the end
-#def main():
-    """
-    Run all program functions
-    
-    data = get_sales_data()
-    sales_data = [int(num) for num in data]
-    update_worksheet(sales_data, "sales")
-    new_surplus_data = calculate_surplus_data(sales_data)
-    update_worksheet(new_surplus_data, "surplus")
-    sales_columns = get_last_5_entries_sales()
-    stock_data = calculate_stock_data(sales_columns)
-    update_worksheet(stock_data, "stock")
-
-#print("Welcome to Baker's Heart Data Automation")
-#this print  statement is the first thing we see, before the functions inside the main function are called. 
-
-
-
-# Call main two functions
-print_bakers_heart_logo()
-main()"""
-    
-#########################################################################
-#end of repeated code
-########################################################################
 
 ###############################
 def update_worksheet(data, worksheet):
@@ -488,73 +403,6 @@ def update_worksheet(data, worksheet):
 
     
 ###############################
-# function to calculate the surplus data,  
-def calculate_surplus_data(sales_row):
-    """
-    Compare sales with stock and calculate the surplus for each item type.
-    The surplus is defined as the sales figure subtracted from the stock:
-    - Positive surplus indicates waste
-    - Negative surplus indicates extra made when stock was sold out.
-    """
-    print("Calculating surplus data...\n")
-    stock = SHEET.worksheet("stock").get_all_values()
-    """
-    defined variable,to get the last line of  numbers from our stock worksheet here.
-    """
-    #pprint(stock)
-    stock_row = stock[-1]
-    print(stock_row)
-
-    surplus_data = []
-    for stock, sales in zip(stock_row, sales_row):
-        """
-        use the zip method to iterate  
-        through two lists at the same time
-        """
-        surplus = int(stock) - sales
-        """
-        to convert the stock to integer, wrap this stock variable in the int() method
-        it will return the converted integer,  and then we can subtract our sales value from it. 
-        """
-        surplus_data.append(surplus)
-        #print(surplus_data)
-
-    return surplus_data
-
-############################
-#function to   get the last 5 records for each sandwich.  
-def get_last_5_entries_sales():
-    """
-    Collects columns of data from sales worksheet, collecting
-    the last 5 entries for each sandwich and returns the data
-    as a list of lists.
-    """
-    sales = SHEET.worksheet("sales")
-
-    columns = []
-    for ind in range(1, 7):
-        column = sales.col_values(ind)
-        columns.append(column[-5:])
-
-    return columns
-##############################
-
-# function we’ll pass it the stock_data that our get_last_5_entries_sales function returned.
-
-def calculate_stock_data(data):
-    """
-    Calculate the average stock for each item type, adding 10%
-    """
-    print("Calculating stock data...\n")
-    new_stock_data = []
-
-    for column in data:
-        int_column = [int(num) for num in column] # converst the valuses into integers
-        average = sum(int_column) / len(int_column)
-        stock_num = average * 1.1
-        new_stock_data.append(round(stock_num))
-
-    return new_stock_data
 
 #######################################################
     ##########. INVENTORY MENU SCREEN .############
@@ -568,19 +416,21 @@ def inventory_menu():
         print("\nInventory Menu\n")
         print("1. View Inventory")
         print("2. Manage Inventory")
-        print("3. Back to Main Menu\n")
+        print("3. Check Low Stock")
+        print("4. Back to Main Menu\n")
 
-        inventory_choice = input("Enter your choice (1, 2, or 3):\n")
+        inventory_choice = input("Enter your choice (1, 2, 3, or 4):\n")
         clearScreen()# Clear the screen when a choice is made
         if inventory_choice == '1':
             view_inventory()
         elif inventory_choice == '2':
             manage_inventory()
-            #update_worksheet(data, "sales")
-        elif inventory_choice == '3':
+        elif inventory_choice == '3': 
+             check_low_stock() 
+        elif inventory_choice == '4':
             break
         else:
-            print("Invalid choice. Please enter 1, 2, or 3.")
+            print("Invalid choice. Please enter 1, 2, 3, or 4.")
 
 
 #Function for inventory list
@@ -734,6 +584,61 @@ def update_ingredient():
     clearScreen()  # Clear the screen when a choice is made
 
 
+#function for low inventory 
+    """
+    Check for ingredients that are low in stock in both stock and inventory.
+    """
+    clearScreen()
+    print("Checking for low stock...\n")
+    
+    # Get the stock and inventory data
+    stock_sheet = SHEET.worksheet("stock")
+    inventory_sheet = SHEET.worksheet("inventory")
+    
+    stock = stock_sheet.get_all_values()
+    inventory = inventory_sheet.get_all_values()
+
+    # Create a dictionary for the latest stock quantities
+    latest_stock = {item[0]: int(item[1]) for item in stock[1:]}
+
+    # Create a dictionary for the latest inventory quantities
+    latest_inventory = {item[0]: int(item[1]) for item in inventory[1:]}
+
+    # Find low stock items in stock
+    low_stock_items = [[item, quantity] for item, quantity in latest_stock.items() if quantity <= threshold]
+
+    # Find low stock items in inventory
+    low_inventory_items = [[item, quantity] for item, quantity in latest_inventory.items() if quantity <= threshold]
+    
+    # Combine low stock and low inventory items
+    combined_low_stock_items = low_stock_items + low_inventory_items
+    
+    if combined_low_stock_items:
+        low_stock_df = pd.DataFrame(combined_low_stock_items, columns=['Item', 'Remaining Quantity'])
+        print(tabulate(low_stock_df, headers='keys', tablefmt='grid', showindex=False))
+    else:
+        print("No items are low in stock or inventory.")
+    
+    input("Press Enter to return to the Inventory Menu...")
+    clearScreen()  # Clear the screen when a choice is made
+def check_low_stock(threshold=10):
+    """
+    Check for ingredients that are low in stock.
+    """
+    clearScreen()
+    print("Checking for low stock...\n")
+    stock = SHEET.worksheet("stock").get_all_values()
+    
+    low_stock_items = [item for item in stock[1:] if int(item[1]) <= threshold]
+    
+    if low_stock_items:
+        stock_df = pd.DataFrame(low_stock_items, columns=stock[0])
+        print(tabulate(stock_df, headers='keys', tablefmt='grid', showindex=False))
+    else:
+        print("No items are low in stock.")
+    
+    input("Press Enter to return to the Inventory Menu...")
+    clearScreen()  # Clear the screen when a choice is made
 
 
 
