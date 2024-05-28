@@ -71,7 +71,7 @@ def print_bakers_heart_logo():
      Prints the specified logo for Baker's Heart.
     ASCII creation redit: patorjk.com
     """
-    print("Welcome to Baker's Heart Data Automation")
+    #print("Welcome to Baker's Heart Data Automation")
 
     print("\n")
     # List of lines that make up the ASCII art logo
@@ -86,7 +86,6 @@ def print_bakers_heart_logo():
         "888    888 .d888888 888888K  88888888 888       Y8888b. ",
         "888   d88P 888  888 888  88b Y8b.     888           X88 ",
         "8888888P   Y888888  888  888  Y8888   888       88888P' ",
-        "                                                          ",
         "                                                          ",
         "                                                          ",
         "888    888                           888                  ",
@@ -150,7 +149,7 @@ def sales_menu():
 # Function to view sales and edit
 def view_sales():
     """
-    View and manage sales data.
+    View and manage sales data .
     """
     while True:
         clearScreen()
@@ -541,7 +540,7 @@ def delete_ingredient():
     clearScreen()  # Clear the screen when a choice is made
 
 
-#Function to update ingredient liest
+#Function to update ingredient list
 def update_ingredient():
     """
     Update an ingredient's name or quantity.
@@ -681,7 +680,7 @@ def main():
     options to select
     """
     while True:
-        print("This is Baker's Heart Data Automation. \n")
+        print("Welcome Baker's Heart bakery. \n")
         time.sleep(1)
         typingPrint("Please choose from the Menu below.\n")
         time.sleep(1)
