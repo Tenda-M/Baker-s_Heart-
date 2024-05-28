@@ -163,6 +163,10 @@ def view_sales():
 
         if sales_choice == '1':
             print("Viewing sales data...\n")
+            # Centering "CAKES" with a fixed width
+            cakes_string = "CAKES"
+            centered_cakes = cakes_string.center(40)
+            print(centered_cakes)
             sales = SHEET.worksheet("sales").get_all_values()
 
             # Convert the sales data to a DataFrame for better display
@@ -182,6 +186,13 @@ def view_sales():
                 update_worksheet(data, "sales")
                 input("Sales data added successfully. Press Enter to return to the Sales Data Menu...")
                 clearScreen()  # Clear the screen when a choice is made
+                break
+            elif choice.lower() == 'n':
+                    clearScreen()
+                    break
+            else:
+                    print("Invalid choice. Please enter 'y' or 'n'.")
+                    input("Press Enter to continue...")
 
         elif sales_choice == '2':
             print("Adding new sales data...\n")
