@@ -30,6 +30,43 @@ Google Sheets Sales, surplus, stock and Inventory Data (view only) [here.](https
 * [**Creation & Deployment**](#creation--deployment)
 * [**Credits**](#credits) 
 
+# User Experience/User Interface (UX/UI)  
+  
+## User Goals
+Accurate Sales Tracking:
+- Enter and view sales data to monitor product performance and identify trends.
+Efficient Inventory Management:
+- Add, view, and update stock data to keep track of inventory levels and ensure adequate stock.
+Surplus Calculation:
+- Calculate and view surplus data to manage waste effectively and optimise production.
+Ingredient Management:
+- Manage the inventory of ingredients by adding new items, updating quantities, and deleting outdated items.
+User-Friendly Interface:
+- Interact with the system through an intuitive command line interface enhanced with ASCII art logos and typing effects for a pleasant user experience.
+
+## User Stories 
+These user stories aim to cover the essential functionalities required for managing the inventory and sales data of Baker's Heart effectively.
+
+1. As a bakery manager, I want to view the current inventory levels, so that I can check the availability of ingredients.
+
+2. As a bakery manager, I want to add new ingredients to the inventory, so that I can keep track of all the ingredients we have in stock.
+
+3. As a bakery manager, I want to update the quantity of existing ingredients, so that the inventory reflects the actual stock levels after purchases or usage.
+
+4. As a bakery manager, I want to delete ingredients from the inventory, so that obsolete or unused items do not clutter the inventory list.
+
+5. As a bakery manager, I want to view sales data, so that I can analyse the sales performance of different products.
+
+6. As a bakery manager, I want to add new sales data, so that I can keep the records up to date with the latest sales figures.
+
+7. As a bakery manager, I want to compare sales data with stock levels, so that I can identify surplus or shortage of ingredients.
+
+8. As a bakery manager, I want to update ingredient names and quantities, so that any changes or corrections can be made accurately.
+
+9. As a bakery manager, I want the system to validate the data I enter, so that errors are minimised, and the data integrity is maintained.
+
+10. As a bakery manager, I want a clear and simple user interface, so that I can easily navigate through different menus and perform tasks efficiently. 
+
 
 ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
