@@ -1,3 +1,37 @@
+
+# **Baker's Heart**
+
+![Baker's Heart ascii art](documentation/readme/main_image.png) 
+
+Baker's Heart is a Python command line interface (CLI) application designed for efficient sales and inventory management in a bakery setting. It allows users to view, add, and update sales and stock data, ensuring accurate tracking of inventory levels. The application provides detailed tabulated views of sales and stock, calculates surplus data for better waste management, and checks for low stock to prevent shortages. With features to manage ingredients, the program enhances operational efficiency. The ASCII art logos and typing effect enhance user interaction, making the application user-friendly and visually appealing.
+
+
+View the live application here: [Baker's Heart](https://bakers-heart-b9b8b5bfd9a7.herokuapp.com/)  
+
+Google Sheets Sales, surplus, stock and Inventory Data (view only) [here.](https://docs.google.com/spreadsheets/d/17wg0BMZQo8cI_MWcDCm8S6tk35mrxapXJOLnCT-UnFo/edit#gid=1071172766)
+
+## Contents
+* [**User Experience/User Interface (UX/UI)**](#user-experienceuser-interface-uxui)
+  * [User Goals](#user-goals)
+  * [User Stories](#user-stories)
+* [**Creation process**](#creation-process)
+  * [Project Planning](#project-planning)
+  * [Flowchart](#flowchart)
+  * [Google API SetUp](#google-api-setup)
+  * [Python Logic](#python-logic)
+  * [Data Model - Google Sheets](#data-model---google-sheets)
+  * [Design Choices](#design-choices)
+* [**Features**](#features)
+  * [How to Use BakeStock](#how-to-use-bakestock)
+  * [Future Features](#future-features)
+* [**Technologies Used**](#technologies-used)
+* [**Libraries & Packages**](#libraries--packages)
+* [**Testing**](#testing)
+* [**Creation & Deployment**](#creation--deployment)
+* [**Credits**](#credits) 
+
+
+¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
 ![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
 Welcome,
