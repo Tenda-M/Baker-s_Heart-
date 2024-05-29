@@ -275,6 +275,10 @@ def view_stock_data():
 
         if stock_choice == '1':
             print("Viewing stock data...\n")
+            # Centering "CAKES" with a fixed width
+            cakes_string = "CAKES"
+            centered_cakes = cakes_string.center(40)
+            print(centered_cakes)
             stock = SHEET.worksheet("stock").get_all_values()
 
             # Convert the stock data to a DataFrame for better display
@@ -377,45 +381,119 @@ def validate_stock_data(values):
 
     return True
 
-# Function to view sales and stock
+
 def view_sales_vs_stock():
     """
     View sales vs stock data.
     """
-    """
-    clearScreen()
+    clearScreen()  # Clear the terminal screen
     print("Viewing sales vs stock data...\n")
-    sales = SHEET.worksheet("sales").get_all_values()
-    stock = SHEET.worksheet("stock").get_all_values()
+    sales = SHEET.worksheet("sales").get_all_values()  # Get all sales data from the worksheet
+    stock = SHEET.worksheet("stock").get_all_values()  # Get all stock data from the worksheet
 
-    # Calculate surplus data
+    # Calculate surplus data only for matching dates
     surplus_data = []
-    headers = sales[0] + ["Surplus"]
-    for sales_row, stock_row in zip(sales[1:], stock[1:]):
-        surplus = []
-        for stock, sale in zip(stock_row, sales_row):
-            try:
-                surplus_value = int(stock) - int(sale)
-                surplus.append(str(surplus_value))
-            except ValueError:
-                surplus.append("N/A")  # Handle non-integer values
-        surplus_data.append(sales_row + surplus)
+    headers = ["Date"] + sales[0][:-1]  # Create headers, excluding 'Date' from sales and adding 'Surplus'
 
-    # Ensure the headers length matches the data length
-    headers = sales[0] + ["Surplus"]
+    # Create dictionaries with date as key for both sales and stock data
+    sales_dict = {row[-1]: row for row in sales[1:]}  # Use the last column (date) as the key for sales data
+    stock_dict = {row[-1]: row for row in stock[1:]}  # Use the last column (date) as the key for stock data
 
-    # Convert the surplus data to a DataFrame for better display
-    surplus_df = pd.DataFrame(surplus_data, columns=headers)
-    
-    # Adjust the width of columns for better display
-    pd.set_option('display.max_columns', None)  # Show all columns
-    pd.set_option('display.max_colwidth', 20)   # Set column width
+    # Iterate through sales data to find matching dates in stock data
+    for date, sales_row in sales_dict.items():
+        if date in stock_dict:
+            stock_row = stock_dict[date]
+            surplus = []
+            # Calculate the surplus for each item, excluding the date column
+            for stock_value, sales_value in zip(stock_row[:-1], sales_row[:-1]):
+                try:
+                    surplus_value = int(stock_value) - int(sales_value)
+                    surplus.append(str(surplus_value))
+                except ValueError:
+                    surplus.append("N/A")  # Handle non-integer values
+            surplus_data.append([date] + surplus)  # Include the date in the surplus data
 
-    print(tabulate(surplus_df, headers='keys', tablefmt='grid', showindex=False))
+    if surplus_data:
+        # Convert the surplus data to a DataFrame for better display
+        surplus_df = pd.DataFrame(surplus_data, columns=headers)
+        
+        # Adjust the width of columns for better display
+        pd.set_option('display.max_columns', None)  # Show all columns
+        pd.set_option('display.max_colwidth', 20)   # Set column width
+
+        # Print the surplus data in a tabulated format
+        print(tabulate(surplus_df, headers='keys', tablefmt='grid', showindex=False))
+
+        # Update surplus worksheet with the calculated data
+        update_surplus_worksheet(surplus_data)
+    else:
+        print("No matching dates found between sales and stock data.")
 
     input("Press Enter to return to the Sales Menu...")
     clearScreen()  # Clear the screen when a choice is made
-"""
+
+def update_surplus_worksheet(surplus_data):
+    """
+    Update the surplus worksheet with the calculated surplus data.
+    """
+    print("Updating surplus worksheet...\n")
+    surplus_worksheet = SHEET.worksheet("surplus")
+
+    # Clear the surplus worksheet before updating
+    surplus_worksheet.clear()
+
+    # Update the headers in the surplus worksheet
+    headers = ["Date"] + ["Van", "Choc", "Berry", "Lemo", "Red"]
+    surplus_worksheet.append_row(headers)
+
+    # Append each surplus row to the surplus worksheet
+    for row in surplus_data:
+        surplus_worksheet.append_row(row)
+
+    print("Surplus worksheet updated successfully.\n")
+
+def calculate_surplus_data(sales_row):
+    """
+    Compare sales with stock and calculate the surplus for each item type.
+    The surplus is defined as the sales figure subtracted from the stock:
+    - Positive surplus indicates waste
+    - Negative surplus indicates extra made when stock was sold out.
+    """
+    print("Calculating surplus data...\n")
+    stock = SHEET.worksheet("stock").get_all_values()
+    stock_row = stock[-1]  # Get the last row of stock data
+
+    surplus_data = []
+    for stock, sales in zip(stock_row, sales_row):
+        try:
+            surplus = int(stock) - int(sales)
+        except ValueError:
+            surplus = "N/A"  # Handle non-integer values
+        surplus_data.append(surplus)
+
+    return surplus_data
+
+    """
+    Compare sales with stock and calculate the surplus for each item type.
+    The surplus is defined as the sales figure subtracted from the stock:
+    - Positive surplus indicates waste
+    - Negative surplus indicates extra made when stock was sold out.
+    """
+    print("Calculating surplus data...\n")
+    stock = SHEET.worksheet("stock").get_all_values()
+    stock_row = stock[-1]  # Get the last row of stock data
+
+    surplus_data = []
+    for stock, sales in zip(stock_row, sales_row):
+        try:
+            surplus = int(stock) - int(sales)
+        except ValueError:
+            surplus = "N/A"  # Handle non-integer values
+        surplus_data.append(surplus)
+
+    return surplus_data
+
+
 ###################################
 
 ###############################
