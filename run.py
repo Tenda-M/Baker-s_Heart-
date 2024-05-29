@@ -143,7 +143,7 @@ def sales_menu():
         elif sales_choice == '4':
             break
         else:
-            print("Invalid choice. Please enter 1, 2, 3, or 4.")
+            print("\033[91mInvalid choice. Please enter 1, 2, 3, or 4.\033[0m")
             input("Press Enter to continue...")
 
 # Function to view sales and edit
@@ -191,8 +191,8 @@ def view_sales():
                     clearScreen()
                     break
             else:
-                    print("Invalid choice. Please enter 'y' or 'n'.")
-                    input("Press Enter to continue...")
+                    print("\033[91mInvalid choice. Please enter 'y' or 'n'.\033[0m")
+                    input("Press Enter to continue to return to Sales Data Menu\n")
 
         elif sales_choice == '2':
             print("Adding new sales data...\n")
@@ -205,7 +205,7 @@ def view_sales():
             break
 
         else:
-            print("Invalid choice. Please enter 1, 2, or 3.")
+            print("\033[91mInvalid choice. Please enter 1, 2, or 3.\033[0m")
             input("Press Enter to continue...")
             clearScreen()  # Clear the screen when a choice is made
 
@@ -253,9 +253,8 @@ def validate_sales_data(values):
         # Validate the last value as a date
         datetime.datetime.strptime(values[-1], '%d/%m/%Y')
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
+        print(f"\033[91mInvalid data: {e}, please try again.\n\033[0m")
         return False  # return to end the while loop
-
     return True
 
 
@@ -287,27 +286,43 @@ def view_stock_data():
 
             print(tabulate(stock_df, headers='keys', tablefmt='grid', showindex=False))
 
-            choice = input("\nWould you like to add stock data? Type 'y' for YES and 'n' to return to the Stock Data Menu:\n")
-            if choice.lower() == 'y':
-                clearScreen()
-                print("Adding new stock data...\n")
-                data = get_stock_data()
-                update_worksheet(data, "stock")
-                input("Stock data added successfully. Press Enter to return to the Stock Data Menu...")
-                clearScreen()  # Clear the screen when a choice is made
+            while True:
+                choice = input("\nWould you like to add stock data? Type 'y' for YES and 'n' to return to the Stock Data Menu:\n")
+                if choice.lower() == 'y':
+                    clearScreen()
+                    print("Adding new stock data...\n")
+                    data = get_stock_data()
+                    update_worksheet(data, "stock")
+                    input("Stock data added successfully. Press Enter to return to the Stock Data Menu...")
+                    clearScreen()  # Clear the screen when a choice is made
+                    break
+                elif choice.lower() == 'n':
+                    clearScreen()
+                    break
+                else:
+                    print("\033[91mInvalid choice. Please enter 'y' or 'n'.\033[0m")
+                    input("Press Enter to continue...")
 
         elif stock_choice == '2':
-            print("Adding new stock data...\n")
-            data = get_stock_data()
-            update_worksheet(data, "stock")
-            input("Stock data added successfully. Press Enter to return to the Stock Data Menu...")
-            clearScreen()  # Clear the screen when a choice is made
+            while True:
+                print("Adding new stock data...\n")
+                data = get_stock_data()
+                if data is not None:
+                    update_worksheet(data, "stock")
+                    input("Stock data added successfully. Press Enter to return to the Stock Data Menu...")
+                    clearScreen()  # Clear the screen when a choice is made
+                    break
+                else:
+                    retry_choice = input("\033[91mInvalid stock data. Type 'r' to retry or 'n' to return to the Stock Data Menu:\033[0m\n")
+                    if retry_choice.lower() == 'n':
+                        clearScreen()
+                        break
 
         elif stock_choice == '3':
             break
 
         else:
-            print("Invalid choice. Please enter 1, 2, or 3.")
+            print("\033[91mInvalid choice. Please enter 1, 2, or 3.\033[0m")
             input("Press Enter to continue...")
             clearScreen()  # Clear the screen when a choice is made
 
@@ -331,7 +346,10 @@ def get_stock_data():
 
         if validate_stock_data(stock_data):
             print("Data is valid!")
-            break  # break to end the while loop
+            return stock_data  # return the valid data
+        else:
+            print("\033[91mInvalid data entered.\033[0m")
+            return None  # return None if the data is invalid
 
     return stock_data
 
@@ -354,8 +372,8 @@ def validate_stock_data(values):
         # Validate the last value as a date
         datetime.datetime.strptime(values[-1], '%d/%m/%Y')
     except ValueError as e:
-        print(f"Invalid data: {e}, please try again.\n")
-        return False  # return to end the while loop
+        print(f"\033[91mInvalid data: {e}, please try again.\033[0m\n")
+        return False
 
     return True
 
@@ -440,7 +458,7 @@ def inventory_menu():
         elif inventory_choice == '4':
             break
         else:
-            print("Invalid choice. Please enter 1, 2, 3, or 4.")
+            print("\033[91mInvalid choice. Please enter 1, 2, 3, or 4.\033[0m")
 
 
 #Function for inventory list
@@ -483,7 +501,7 @@ def manage_inventory():
         elif manage_choice == '4':
              break  # Return to Inventory Menu
         else:
-            print("Invalid choice. Please enter 1, 2, 3, or 4.")
+            print("\033[91mInvalid choice. Please enter 1, 2, 3, or 4.\033[0m")
             input("Press Enter to continue...")
 
 
@@ -539,7 +557,7 @@ def delete_ingredient():
                 print(f"Ingredient '{ingredient_name}' deleted successfully.")
                 break
         else:
-            print(f"Ingredient '{ingredient_name}' not found.")
+            print(f"\033[91mIngredient '{ingredient_name}' not found.\033[0m")
         
         print("\nUpdated Inventory List:")
         view_inventory()
@@ -580,7 +598,7 @@ def update_ingredient():
                 print(f"Ingredient '{ingredient_name}' updated successfully.")
                 break
         else:
-            print(f"Ingredient '{ingredient_name}' not found.")
+            print(f"\033[91mIngredient '{ingredient_name}' not found.\033[0m")
             input("Press Enter to continue...")
 
         print("\nUpdated Inventory List:")
@@ -717,7 +735,7 @@ def main():
             clearScreen()
             break
         else:
-            print("Invalid choice. Please enter 1, 2, or 3.")
+            print("\033[91mInvalid choice. Please enter 1, 2, or 3.\033[0m")
 
 # Main loop to restart the program
 while True:
