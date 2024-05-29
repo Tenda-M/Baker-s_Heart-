@@ -740,14 +740,13 @@ def update_ingredient():
 #######################################################
     ##########. EXIT SCREEN .############
 #######################################################
-
 def print_goodbye_logo():
     """
-    Prints a goodbye ASCII art logo.
+    Prints a goodbye ASCII art logo and terminates the program.
     """
     print("\n")
     # List of lines that make up the ASCII art logo
-    #Credit: https://ascii.today/
+    # Credit: https://ascii.today/
     goodbye_logo = """
      .d8888b.                         888 888                        
     d88P  Y88b                        888 888                        
@@ -764,16 +763,16 @@ def print_goodbye_logo():
 
     print(goodbye_logo)
     print("\n")
+    sys.exit()  # Terminate the program
 
 #######################################################
-    ##########. Main MANU .#################
+    ##########. MAIN MENU .#################
 #######################################################
   
-#Mains functions, with function calls at the end
 def main():
     """
-    This the main Menu that will display after the ASCCI disappears and give user
-    options to select
+    This is the main Menu that will display after the ASCII disappears and gives users
+    options to select.
     """
     while True:
         print("Welcome Baker's Heart bakery. \n")
@@ -786,7 +785,7 @@ def main():
         print("3. Exit\n")
 
         choice = input("Enter your choice (1, 2, or 3):\n")
-        clearScreen()# Clear the screen when a choice is made
+        clearScreen()  # Clear the screen when a choice is made
         if choice == '1':
             # Call the sales menu or related functions
             print("Sales Menu selected.")
@@ -804,10 +803,6 @@ def main():
         else:
             print("\033[91mInvalid choice. Please enter 1, 2, or 3.\033[0m")
 
-# Main loop to restart the program
-while True:
-    # Call main two functions
-    print_bakers_heart_logo()
-    main()
-
-
+# Main execution
+print_bakers_heart_logo()
+main()
