@@ -526,21 +526,18 @@ def inventory_menu():
         print("\nInventory Menu\n")
         print("1. View Inventory")
         print("2. Manage Inventory")
-        print("3. Check Low Stock")
-        print("4. Back to Main Menu\n")
+        print("3. Back to Main Menu\n")
 
-        inventory_choice = input("Enter your choice (1, 2, 3, or 4):\n")
+        inventory_choice = input("Enter your choice (1, 2, or 3):\n")
         clearScreen()# Clear the screen when a choice is made
         if inventory_choice == '1':
             view_inventory()
         elif inventory_choice == '2':
             manage_inventory()
-        elif inventory_choice == '3': 
-             check_low_stock() 
-        elif inventory_choice == '4':
+        elif inventory_choice == '3':
             break
         else:
-            print("\033[91mInvalid choice. Please enter 1, 2, 3, or 4.\033[0m")
+            print("\033[91mInvalid choice. Please enter 1, 2, or 3.\033[0m")
 
 
 #Function for inventory list
@@ -588,16 +585,29 @@ def manage_inventory():
 
 
 #Function to add ingredients
-
 def add_new_ingredient():
     """
     Add a new ingredient to the inventory.
     """
     while True:
         clearScreen()  # Clear the screen when a choice is made
-        print("Please add new ingredient\n")
-        name = input("Enter name of the new ingredient... eg coco(g):\n")
-        quantity = input("Enter the quantity of the new ingredient:\n")
+        print("Please add a new ingredient\n")
+        
+        while True:
+            name = input("Enter the name of the new ingredient (e.g., coco(g)):\n")
+            if all(char.isalpha() or char.isspace() or char in "()[]" for char in name.replace(' ', '')):
+                break
+            else:
+                print("\033[91mInvalid name. Please enter a valid ingredient name containing only alphabetic characters and allowed symbols ((), []).\033[0m")
+                input("Press Enter to try again...")
+
+        while True:
+            quantity = input("Enter the quantity of the new ingredient:\n")
+            if quantity.isdigit():
+                break
+            else:
+                print("\033[91mInvalid quantity. Please enter a number.\033[0m")
+                input("Press Enter to try again...")
 
         # Append the new ingredient to the inventory sheet
         inventory_sheet = SHEET.worksheet("inventory")
@@ -607,14 +617,25 @@ def add_new_ingredient():
         print("\nUpdated Inventory List:")
         view_inventory()
         
-        choice = input("Would you like to add another ingredient?. Type y if YES and n for NO:\n")
-        if choice.lower() != 'y':
-            break
+        while True:
+            choice = input("Would you like to add another ingredient? Type 'y' for YES and 'n' for NO:\n")
+            if choice.lower() == 'y':
+                break
+            elif choice.lower() == 'n':
+                clearScreen()
+                input("Press Enter to return to Manage Inventory...")
+                clearScreen()  # Clear the screen when a choice is made
+                return
+            else:
+                print("\033[91mInvalid choice. Please enter 'y' for YES or 'n' for NO.\033[0m")
+                input("Press Enter to try again...")
 
     clearScreen()  # Clear the screen when a choice is made
 
     input("Press Enter to return to Manage Inventory...")
     clearScreen()  # Clear the screen when a choice is made
+
+     
 
 
 #function to delete ingredient
@@ -631,27 +652,40 @@ def delete_ingredient():
         inventory_sheet = SHEET.worksheet("inventory")
         ingredients = inventory_sheet.get_all_values()
 
-        # Credit: https://stackoverflow.com/questions/21714400/enumerate-on-specific-items-of-a-list
+        found = False  # Flag to track if ingredient is found
+
         for idx, ingredient in enumerate(ingredients):
-            # first convert to str, to ensure that the code handles both numbers and words properly,
-            if str(ingredient[0]).lower() == ingredient_name.lower():
+            # Convert to str to ensure the code handles both numbers and words properly
+            if str(ingredient[0]).strip().lower() == ingredient_name.strip().lower():
                 inventory_sheet.delete_rows(idx + 1)
                 print(f"Ingredient '{ingredient_name}' deleted successfully.")
+                found = True
                 break
-        else:
+
+        if not found:
             print(f"\033[91mIngredient '{ingredient_name}' not found.\033[0m")
-        
+            input("Press Enter to try again...")
+
         print("\nUpdated Inventory List:")
         view_inventory()
 
-        choice = input("Would you like to delete another ingredient? Type 'y' for YES and 'n' for NO:\n")
-        if choice.lower() != 'y':
-            break
+        while True:
+            choice = input("Would you like to delete another ingredient? Type 'y' for YES and 'n' for NO:\n")
+            if choice.lower() == 'y':
+                break
+            elif choice.lower() == 'n':
+                clearScreen()
+                return
+            else:
+                print("\033[91mInvalid choice. Please enter 'y' for YES or 'n' for NO.\033[0m")
+                input("Press Enter to try again...")
 
     clearScreen()  # Clear the screen when a choice is made
+    
 
 
 #Function to update ingredient list
+ # Function to update ingredient list
 def update_ingredient():
     """
     Update an ingredient's name or quantity.
@@ -686,68 +720,19 @@ def update_ingredient():
         print("\nUpdated Inventory List:")
         view_inventory()
 
-        choice = input("Would you like to update another ingredient? Type 'y' for YES and 'n' for NO:\n")
-        if choice.lower() != 'y':
-            break
+        while True:
+            choice = input("Would you like to update another ingredient? Type 'y' for YES and 'n' for NO:\n")
+            if choice.lower() == 'y':
+                break
+            elif choice.lower() == 'n':
+                clearScreen()
+                input("Press Enter to return to Manage Inventory...")
+                clearScreen()  # Clear the screen when a choice is made
+                return
+            else:
+                print("\033[91mInvalid choice. Please enter 'y' for YES or 'n' for NO.\033[0m")
+                input("Press Enter to try again...")
 
-    input("Press Enter to return to Manage Inventory...")
-    clearScreen()  # Clear the screen when a choice is made
-
-
-#function for low inventory 
-    """
-    Check for ingredients that are low in stock in both stock and inventory.
-    """
-    clearScreen()
-    print("Checking for low stock...\n")
-    
-    # Get the stock and inventory data
-    stock_sheet = SHEET.worksheet("stock")
-    inventory_sheet = SHEET.worksheet("inventory")
-    
-    stock = stock_sheet.get_all_values()
-    inventory = inventory_sheet.get_all_values()
-
-    # Create a dictionary for the latest stock quantities
-    latest_stock = {item[0]: int(item[1]) for item in stock[1:]}
-
-    # Create a dictionary for the latest inventory quantities
-    latest_inventory = {item[0]: int(item[1]) for item in inventory[1:]}
-
-    # Find low stock items in stock
-    low_stock_items = [[item, quantity] for item, quantity in latest_stock.items() if quantity <= threshold]
-
-    # Find low stock items in inventory
-    low_inventory_items = [[item, quantity] for item, quantity in latest_inventory.items() if quantity <= threshold]
-    
-    # Combine low stock and low inventory items
-    combined_low_stock_items = low_stock_items + low_inventory_items
-    
-    if combined_low_stock_items:
-        low_stock_df = pd.DataFrame(combined_low_stock_items, columns=['Item', 'Remaining Quantity'])
-        print(tabulate(low_stock_df, headers='keys', tablefmt='grid', showindex=False))
-    else:
-        print("No items are low in stock or inventory.")
-    
-    input("Press Enter to return to the Inventory Menu...")
-    clearScreen()  # Clear the screen when a choice is made
-def check_low_stock(threshold=10):
-    """
-    Check for ingredients that are low in stock.
-    """
-    clearScreen()
-    print("Checking for low stock...\n")
-    stock = SHEET.worksheet("stock").get_all_values()
-    
-    low_stock_items = [item for item in stock[1:] if int(item[1]) <= threshold]
-    
-    if low_stock_items:
-        stock_df = pd.DataFrame(low_stock_items, columns=stock[0])
-        print(tabulate(stock_df, headers='keys', tablefmt='grid', showindex=False))
-    else:
-        print("No items are low in stock.")
-    
-    input("Press Enter to return to the Inventory Menu...")
     clearScreen()  # Clear the screen when a choice is made
 
 
