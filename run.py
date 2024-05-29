@@ -388,6 +388,10 @@ def view_sales_vs_stock():
     """
     clearScreen()  # Clear the terminal screen
     print("Viewing sales vs stock data...\n")
+    # Centering "CAKES" with a fixed width
+    cakes_string = "CAKES"
+    centered_cakes = cakes_string.center(70)
+    print(centered_cakes)
     sales = SHEET.worksheet("sales").get_all_values()  # Get all sales data from the worksheet
     stock = SHEET.worksheet("stock").get_all_values()  # Get all stock data from the worksheet
 
