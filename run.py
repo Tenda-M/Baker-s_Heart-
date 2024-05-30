@@ -135,6 +135,10 @@ def sales_menu():
         elif sales_choice == '4':
             break
         else:
+            """
+            Credit: https://stackoverflow.com/questions/15580303/python
+            -output-complex-line-with-floats-colored-by-value
+            """
             print("\033[91mInvalid choice. Please enter 1, 2, 3, or 4.\033[0m")
             input("Press Enter to continue...")
 
@@ -468,6 +472,7 @@ def view_sales_vs_stock():
         pd.set_option('display.max_colwidth', 20)   # Set column width
 
         # Print the surplus data in a tabulated format
+        # Credit: https://pypi.org/project/tabulate/
         print(
          tabulate(
           surplus_df, headers='keys', tablefmt='grid', showindex=False))
@@ -734,6 +739,7 @@ def update_ingredient():
         ingredients = inventory_sheet.get_all_values()
 
         for idx, ingredient in enumerate(ingredients):
+            # Check if entered ingredient name matches any in the inventory
             if (str(ingredient[0]).strip().lower() ==
                str(ingredient_name).strip().lower()):
                 # Print current name and quantity of the ingredient
@@ -744,11 +750,13 @@ def update_ingredient():
                 new_quantity = input("Enter new quantity (leave blank to keep"
                                      " current quantity):\n")
 
+                # Update the ingredient details if new name/quantity provided
                 if new_name:
                     ingredient[0] = new_name
                 if new_quantity:
                     ingredient[1] = new_quantity
 
+                # Update the ingredient in the inventory sheet
                 inventory_sheet.update(range_name=f'A{idx + 1}:B{idx + 1}',
                                                   values=[ingredient])
                 print(f"Ingredient '{ingredient_name}' updated successfully.")
