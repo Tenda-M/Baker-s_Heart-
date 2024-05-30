@@ -386,7 +386,8 @@ pandas: Pandas is a powerful data manipulation library that is used to convert d
 
 tabulate: This library is used to format the DataFrame outputs into neatly aligned tables in the terminal. It improves the readability of the data by displaying it in a structured grid format, which is particularly useful for viewing sales and stock data.
 
-
+# Testing
+I have created a separate file for my Manual Testing and Validation. It can be found here:[TESTING.md](/TESTING.md)
 
 
 
