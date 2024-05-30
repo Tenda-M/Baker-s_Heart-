@@ -22,7 +22,7 @@ Google Sheets Sales, surplus, stock and Inventory Data (view only) [here.](https
   * [Data Model - Google Sheets](#data-model---google-sheets)
   * [Design Choices](#design-choices)
 * [**Features**](#features)
-  * [How to Use Baker's Heart](#how-to-use-baker's Heart)
+  * [How to Use Baker's Heart](#how-to-use-baker's-Heart)
   * [Future Features](#future-features)
 * [**Technologies Used**](#technologies-used)
 * [**Libraries & Packages**](#libraries--packages)
@@ -532,6 +532,6 @@ A local clone of this repository can be made on GitHub. Please follow the below 
 - Special thanks to my mentor, Excellence Ilesanmi, for providing invaluable support and guidance throughout this journey.
 - I am deeply thankful to my fellow peers at Code Institute for their invaluable support and camaraderie.
 
-[Back to Top](#Baker's Heart)
 
+[Back to Top](#Baker's-Heart)
 ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
