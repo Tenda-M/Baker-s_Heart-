@@ -20,7 +20,6 @@ Google Sheets Sales, surplus, stock and Inventory Data (view only) [here.](https
   * [Google API SetUp](#google-api-setup)
   * [Python Logic](#python-logic)
   * [Data Model - Google Sheets](#data-model---google-sheets)
-  * [Design Choices](#design-choices)
 * [**Features**](#features)
   * [How to Use Baker's Heart](#how-to-use-baker's-Heart)
   * [Future Features](#future-features)
@@ -97,7 +96,9 @@ By using Lucidchart for planning, I was able to create a clear and organised vis
 
 
 ## Flowchart   
-ADD IMAGE
+To aid in organising my project, I utilised Lucidchart to create a flowchart outlining the expected functions and their sequential flow.
+![Baker's Heart FlowChart](/documentation/readme/flow_chart.png)  
+
 
 <br>  
 
@@ -137,10 +138,6 @@ The user data is inputted into the respective Google Sheets worksheets. Each wor
 
 - Inventory Worksheet: Lists all ingredients along with their quantities, facilitating efficient inventory management and restocking. 
 !Inventory data](/documentation/readme/inventory_data.png)
-
-Design Choices
-*****EDIT*******
-
 
 # Features
 
@@ -397,7 +394,7 @@ The following steps for creating and configuring a new Python workspace and API 
 <summary>Steps to create a new repository.</summary>  
 The [Code Institute's Python Essential Template](https://github.com/Code-Institute-Org/python-essentials-template) was used to create a terminal for my Python file to generate it's output. 
 
-To utilize this template, adhere to these steps:
+To utilise this template, adhere to these steps:
 1. Sign in to [GitHub](https://github.com/) or register for a new account.
 2. Go to the Python template repository provided above.
 3. Select '**Use this template**' -> '**Create a new repository**'.
@@ -516,7 +513,7 @@ A local clone of this repository can be made on GitHub. Please follow the below 
 ## Content References
 # References
 
-- The gspread Documentation is utilized as a reference and guide for data manipulation between Python and Google Sheets throughout the project: [gspread Docs](https://docs.gspread.org/en/latest/index.html)
+- The gspread Documentation is utilised as a reference and guide for data manipulation between Python and Google Sheets throughout the project: [gspread Docs](https://docs.gspread.org/en/latest/index.html)
 
 - The Code Institute's 'Love Sandwiches' project provides guidance for setting up Google Sheets API and Credentials: [Code Institute](https://codeinstitute.net/ie/)
 
@@ -533,5 +530,4 @@ A local clone of this repository can be made on GitHub. Please follow the below 
 - I am deeply thankful to my fellow peers at Code Institute for their invaluable support and camaraderie.
 
 
-[Back to Top](#Baker's-Heart)
-¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
+
