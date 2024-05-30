@@ -368,9 +368,23 @@ Git: Implemented for version control, ensuring the ability to track changes, man
 
 [PEP8 Validator](https://pep8ci.herokuapp.com/#): Used to validate the Python code, ensuring adherence to coding standards and best practices.
 
+<br>  
 
+# Libraries & Packages 
 
+gspread: This library is used to interact with Google Sheets, allowing the application to read, write, and manage data stored in Google Sheets as if they were a database. It facilitates seamless integration between the Python application and Google Sheets.
 
+google.oauth2.service_account: Specifically, the Credentials class from this module is utilised to handle authentication. It provides secure access to the Google Sheets API by managing the OAuth 2.0 credentials required for accessing the user's Google Sheets.
+
+time: The time library is used to add delays in the text display, enhancing the user experience by simulating a typing effect. This creates a more interactive and engaging interface.
+
+sys: This library is used to manipulate the Python runtime environment, particularly for controlling text output in the terminal. It supports the implementation of the typing effect for text display.
+
+os: The os library provides a way to interact with the operating system, specifically to clear the terminal screen. This helps in maintaining a clean and user-friendly interface by removing previous outputs when navigating through menus.
+
+pandas: Pandas is a powerful data manipulation library that is used to convert data from Google Sheets into DataFrames. This enables easy handling, processing, and display of data in tabulated formats, making it simpler to manage and analyse the data.
+
+tabulate: This library is used to format the DataFrame outputs into neatly aligned tables in the terminal. It improves the readability of the data by displaying it in a structured grid format, which is particularly useful for viewing sales and stock data.
 
 
 
