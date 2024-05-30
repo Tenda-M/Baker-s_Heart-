@@ -127,16 +127,16 @@ The user data is inputted into the respective Google Sheets worksheets. Each wor
 
 
 - Sales Worksheet: Stores detailed records of all sales data entered by the user, ensuring accurate tracking and analysis of sales performance.
-[Sales data](/documentation/readme/sales_data.png) 
+![Sales data](/documentation/readme/sales_data.png) 
 
 - Stock Worksheet: Maintains current stock levels, allowing for real-time monitoring and management of inventory.
-[Stock data](/documentation/readme/stock_data.png)
+![Stock data](/documentation/readme/stock_data.png)
 
 - Surplus Worksheet: Records surplus data, indicating the difference between stock and sales to help manage waste and production needs.
-[Surplus data](/documentation/readme/surplus_data.png)
+!Surplus data](/documentation/readme/surplus_data.png)
 
 - Inventory Worksheet: Lists all ingredients along with their quantities, facilitating efficient inventory management and restocking. 
-[Inventory data](/documentation/readme/inventory_data.png)
+!Inventory data](/documentation/readme/inventory_data.png)
 
 Design Choices
 *****EDIT*******
@@ -193,24 +193,24 @@ The Sales Menu provides several options for managing and viewing your sales data
    #### View Sales Data Menu
         Select this option by entering '1' and pressing Enter.
         This menu provides sub-options menu view, add, and return to sales data menu.
-        ![View Sales Data Menu screenshot](/documentation/readme/sales_data_menu.png)
+![View Sales Data Menu screenshot](/documentation/readme/sales_data_menu.png)
 
     1. View sales data:
         This will display the current sales data in a tabulated format, showing details such as item names, quantities sold, and dates.
-        ![View sales data screenshot](/documentation/readme/sales_cake_data.png)
+![View sales data screenshot](/documentation/readme/sales_cake_data.png)
 
         After viewing the sales data, you will have the option to add new sales data.
             If you choose to add new sales data, you will be prompted to enter sales figures for five items followed by a date (e.g., 10,20,30,40,50,01/01/2024).
             The new sales data will be added to the sales worksheet, and you will return to the Sales Data Menu.
             Press Enter to return to the Sales Data Menu after viewing the sales data.
-            ![Add Sales Data screenshot](/documentation/readme/add_cake_data.png)
+![Add Sales Data screenshot](/documentation/readme/add_cake_data.png)
 
     2. Add Sales Data:
         Select this option by entering '2' and pressing Enter.
         You will be prompted to enter sales figures for five items followed by a date (e.g., 10,20,30,40,50,01/01/2024).
         The new sales data will be validated and added to the sales worksheet.
         After successfully adding the sales data, you will return to the Sales Data Menu.
-        ![Add Sales Data screenshot](/documentation/readme/add_cake_data.png)
+![Add Sales Data screenshot](/documentation/readme/add_cake_data.png)
     
     3. Return to sales data menu:
        Select this option by entering '3' and pressing Enter.
@@ -219,21 +219,21 @@ The Sales Menu provides several options for managing and viewing your sales data
    #### View Stock Data Menu
     In the Sales Menu, type '2' and press Enter to view the stock data.
     This menu provides sub-options menu view, add, and return to stock data menu.
-    ![View Stock Data Menu screenshot](/documentation/readme/stock_data_menu.png)
+![View Stock Data Menu screenshot](/documentation/readme/stock_data_menu.png)
 
     1. Viewing Current Stock Data:
     Once you select to view the stock data, the application will display the current stock data in a neatly formatted table. The table will show details such as item names and quantities in stock.
-    ![Viewing Current Stock screenshot](/documentation/readme/stock_cake_data.png)
+ ![Viewing Current Stock screenshot](/documentation/readme/stock_cake_data.png)
  
     After viewing the stock data, you will be prompted with an option to add new stock data.
     If you wish to add new stock data, type 'y' and press Enter. If you do not wish to add new stock data, type 'n' and press Enter to return to the Stock Data Menu.
-    ![Adding New Stock Data screenshot](/documentation/readme/add_stock_data.png)
+![Adding New Stock Data screenshot](/documentation/readme/add_stock_data.png)
 
     2. Adding New Stock Data:
 
     If you choose to add new stock data, you will be prompted to enter stock figures for five items followed by a date.
     Enter the data in the following format: quantity1,quantity2,quantity3,quantity4,quantity5,date (e.g., 100,200,300,400,500,01/01/2024).
-    ![Adding New Stock Data screenshot](/documentation/readme/add_stock_data.png)
+![Adding New Stock Data screenshot](/documentation/readme/add_stock_data.png)
 
    3. Returning to the Stock Data Menu:
 
@@ -247,7 +247,7 @@ The Sales Menu provides several options for managing and viewing your sales data
         The surplus data will be displayed in a tabulated format, showing the difference between stock and sales for each item on matching dates.
         If no matching dates are found, an appropriate message will be displayed.
         Press Enter to return to the Sales Menu after viewing the sales vs stock data.
-    ![View Sales vs Stock screenshot](/documentation/readme/sales_vs_stock.png)
+ ![View Sales vs Stock screenshot](/documentation/readme/sales_vs_stock.png)
 
     Return to Main Menu:
         Select this option by entering '4' and pressing Enter.
@@ -283,7 +283,7 @@ This menu provides sub-options menu to add, delete, or update ingredients in you
             Next, enter the quantity of the new ingredient as a number.
             The new ingredient will be added to the inventory, and the updated inventory list will be displayed.
             You can choose to add another ingredient or return to the Manage Inventory menu.
-            [Add New Ingredient screenshot](/documentation/readme/add_ingredient.png)
+![Add New Ingredient screenshot](/documentation/readme/add_ingredient.png)
 
     2. Delete Ingredient:
             Enter '2' to delete an ingredient.
@@ -291,7 +291,7 @@ This menu provides sub-options menu to add, delete, or update ingredients in you
             If the ingredient is found, it will be removed from the inventory, and the updated inventory list will be displayed.
             If the ingredient is not found, an alert will be displayed, and you will be prompted to try again.
             You can choose to delete another ingredient or return to the Manage Inventory menu.
-            [Delete Ingredient screenshot](/documentation/readme/delete_ingredient.png)
+![Delete Ingredient screenshot](/documentation/readme/delete_ingredient.png)
 
     3. Update Ingredient Name or Quantity:
             Enter '3' to update an ingredient.
@@ -300,7 +300,7 @@ This menu provides sub-options menu to add, delete, or update ingredients in you
             The ingredient details will be updated, and the updated inventory list will be displayed.
             If the ingredient is not found, an alert will be displayed, and you will be prompted to try again.
             You can choose to update another ingredient or return to the Manage Inventory menu.
-            [Update Ingredient screenshot](/documentation/readme/update_ingredient.png)
+![Update Ingredient screenshot](/documentation/readme/update_ingredient.png)
 
 #### Return to Main Menu:
     Select this option by entering '3' and pressing Enter.
@@ -309,24 +309,24 @@ This menu provides sub-options menu to add, delete, or update ingredients in you
 ### Using Exit:
         Selecting this option will end the application. Ensure you have saved any changes before exiting.
 
-By following these steps, you can effectively navigate and utilize the Baker's Heart application to manage sales and inventory efficiently.
+By following these steps, you can effectively navigate and utilise the Baker's Heart application to manage sales and inventory efficiently.
 
 ### Error Handling and Clear 
 
     Input Validation:
         The program extensively validates user input to ensure it meets the required format and criteria.
         For instance, when entering sales data, the program checks if the input contains five numbers followed by a date in the correct format. If the input is invalid, an error message is displayed, and the user is prompted to try again.
-        [Invalid data screenshot](/documentation/readme/invalid_data.png)
+![Invalid data screenshot](/documentation/readme/invalid_data.png)
 
     Try/Except Blocks:
         The program uses try/except blocks to handle potential errors gracefully. For example, when converting input values to integers, if the conversion fails, the program catches the error and provides a clear error message to the user.
 
     Clear Error Messages:
         Whenever an error occurs, the program provides clear and specific error messages. This helps users understand what went wrong and how to correct their input.
-        [Invalid option screenshot](/documentation/readme/invalid_option.png)
+![Invalid option screenshot](/documentation/readme/invalid_option.png)
 
    Clear Screen Function:
-    The clearScreen() function is used to clear the terminal screen before displaying new content. This helps maintain a clean and organized display, making it easier for users to focus on the current task.
+    The clearScreen() function is used to clear the terminal screen before displaying new content. This helps maintain a clean and organised display, making it easier for users to focus on the current task.
     The function is called at the beginning of each menu or sub-menu to ensure that previous outputs and inputs are cleared.
 
 -----  
@@ -343,6 +343,30 @@ Inventory Alerts and Notifications:
 
 Enhanced Reporting and Analytics:
 Introduce detailed reporting features that generate visual charts and graphs for sales, stock levels, and inventory trends.
+
+
+# Technologies Used 
+ HTML5: Provided within the Code Institute's [Python Essentials template](https://github.com/Code-Institute-Org/python-essentials-template) to ensure a standardised structure and presentation.
+
+JavaScript: Included within the same template to enable dynamic and interactive elements.
+
+Python: All Python code was authored by me, except where noted in the source code or the Credits section below, showcasing my ability to build functional and logical scripts.
+
+[Lucidchart](https://www.lucidchart.com/pages/): Used to design the flowcharts necessary for project planning, aiding in visualising the workflow and processes.
+
+[GitHub](https://github.com/): Used to host the program's source code, facilitating version control and collaborative development.
+
+[Gitpod](https://www.gitpod.io/): Utilised as the development environment for coding and testing the program, providing an integrated workspace.
+
+Git: Implemented for version control, ensuring the ability to track changes, manage branches, and collaborate efficiently.
+
+[Google Sheets](https://docs.google.com/spreadsheets/) : Used for storing, editing, and retrieving user data, simulating a database environment for the application.
+
+[Google Cloud Platform](https://cloud.google.com/): Provided the APIs necessary for connecting the data sheets with the Python code, enabling seamless data manipulation.
+
+[Heroku](https://heroku.com/apps): Used to deploy the project, making it accessible online and allowing real-time interaction.
+
+[PEP8 Validator](https://pep8ci.herokuapp.com/#): Used to validate the Python code, ensuring adherence to coding standards and best practices.
 
 
 
