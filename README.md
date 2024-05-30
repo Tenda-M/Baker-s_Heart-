@@ -389,43 +389,133 @@ tabulate: This library is used to format the DataFrame outputs into neatly align
 # Testing
 I have created a separate file for my Manual Testing and Validation. It can be found here:[TESTING.md](/TESTING.md)
 
+# Creation & Deployment  
+The following steps for creating and configuring a new Python workspace and API credentials have been informed by and adapted from the Python walkthrough project 'Love Sandwiches' by [Code Institute's](https://codeinstitute.net/ie/). Please ensure each step is applicable to your project requirements and adjust the provided data accordingly.
+
+### Creating a new repository 
+<details open>
+<summary>Steps to create a new repository.</summary>  
+The [Code Institute's Python Essential Template](https://github.com/Code-Institute-Org/python-essentials-template) was used to create a terminal for my Python file to generate it's output. 
+
+To utilize this template, adhere to these steps:
+1. Sign in to [GitHub](https://github.com/) or register for a new account.
+2. Go to the Python template repository provided above.
+3. Select '**Use this template**' -> '**Create a new repository**'.
+4. Pick a new repository name and choose '**Create repository from template**'.
+5. Within your new repository area, click the green '**Gitpod**' button to create a new workspace.
+
+</details> 
+  
+-----  
+### Activating the Google Drive & Sheets API
+<details>
+<summary>Steps to activate the APIs</summary>
+To access the data in a Google Sheets worksheet using Python code, an API is required. Please follow these steps to set up your APIs: 
+
+1. Go to the [Google Cloud Platform](https://cloud.google.com), using your email address/Google account that is registered to you alone.
+2. On the Google Cloud Platform Dashboard, create a new project by clicking the '**Select a Project**' button and choosing the '**New Project**' option. Provide a name for your new project and click '**Create**'. (Since access credentials are unique to each project, create a new project for every project you build.)
+3. Click on '**Select Project**' in the blue banner to access your project page.
+4. From the left side menu, select '**APIs and Services**', then choose '**Library**'.
+5. Utilise the search bar to find the two APIs required for this project: Google Drive API and Google Sheets API. For each API, select it from the search results and click '**Enable**' on its main page. Follow the steps provided for the Google Drive API, but only enable the Google Sheets API by clicking '**Enable**'. There's no need to download credentials again for the Google Sheets API.
+6. On the API overview page, click on '**Create Credentials**' to generate credentials allowing access to your Google Drive from your Python code.
+7. Complete the form fields and dropdown menus with project-specific information. For instance, select **Google Drive API -> Application Data -> No, I'm not using them** if not using Kubernetes, App Engine, etc.
+8. Under Service Account Details, assign a Service Account name and click '**Create**'.
+9. From the Role Dropdown menu, choose **Basic -> Editor**, then click '**Continue**'. If it's a personal project and you don't need to grant users access to the service account, click '**Done**' to finish the form.
+10. On the next page, click on your newly created Service Account, then navigate to the '**Keys**' tab and select '**Add Key**'. Choose '**Create New Key**'.
+11. Select JSON and click '**Create**'. Your JSON file containing API credentials will be downloaded to your machine.
+
+</details>
+
+-----  
+
+### Setting up the Gitpod workspace for the APIs
+<details>
+<summary>Steps for workspace setup</summary>
+
+1. Within the newly created Gitpod workspace using the Python Essentials template, drag and drop the JSON file generated in the preceding steps into the workspace.
+2. Optionally rename it to `CREDS.json`, then open the file. Locate the client_email address you previously entered, and copy it without the surrounding quotes.
+3. In the Google Sheets file designated for this project, click '**Share**', paste the email address into the field, select '**Editor**', uncheck '**Notify People**', and click '**Share**'. This grants our project access to the spreadsheet.
+4. To prevent the private credentials from being exposed in the cloud, add the `creds.json` file to your `gitignore` file before committing any changes to your repository and pushing them to the cloud.
+5. Execute the command `git status` to verify that the `creds.json` file is not staged for commit.
+
+</details>  
+  
+-----  
+
+### Initial Code for connecting to our API with Python
+<details>
+<summary>Steps to including the Python/API connection code</summary>
+
+1. At the beginning of the `run.py` file associated with this project, you'll find the necessary code to ensure proper connection with your APIs. It's crucial to provide the exact spreadsheet name to the `SHEET = GSPREAD_CLIENT.opn('your-filename-here')` code to prevent gspread from encountering errors.
+2. Use the command `pip3 install gspread google-auth` to install the gspread package for managing worksheet data and the google-auth package for accessing your Google Sheets account using the previously downloaded Credentials. Execute this command in the Gitbash terminal.
+3. Please consult the `run.py` file for the import, SCOPE, CREDS, SCOPED CREDS, GSPREAD CLIENT, and SHEET code required to establish API connections. Adjust any personal data in accordance with your project's requirements.
+
+</details>
+  
+-----  
+
+### Deploying to Heroku 
+This project has been deployed on Heroku, utilising Python as the backend language. For precise testing, I opted for early deployment on Heroku using Automatic Deployment to update the program whenever new code was pushed to my GitHub repository. Below are the steps I followed to set up my project, with guidance from the [Code Institute's](https://codeinstitute.net/ie/) 'Love Sandwiches' project.
+
+1. Sign in to [Heroku](https://id.heroku.com/login) or create an account if you're a new user.
+2. Once logged in, navigate to the '**New**' button at the top right corner of the Heroku Dashboard, and select '**Create New App**'.
+<details>
+<summary>Create new app</summary>
+<img src ="documentation/readme/heroku_1.png">
+</details>  
+
+3. Provide an app name and select your region. Then, click '**Create App**'.
+<details>
+<summary>Enter app name</summary>
+<img src ="documentation/readme/heroku_2.png">
+</details>  
+  
+4. In the Deploy tab, navigate to '**Settings**', go to the '**Config Vars**' section, and click '**Reveal Config Vars**'. Here, input KEY:VALUE pairs required for the app's successful operation. Enter `CREDS` as the KEY and paste the content of your `CREDS.json` file as the VALUE. Then, select '**Add**'.
+5. Repeat the process with a KEY:VALUE pair of `PORT` and `8000`.
+6. In the Settings tab, under the Buildpack section, click '**Add Buildpack**' at the bottom right of the screen. Select the '**Python**' pack first, save changes, then choose the '**NodeJS**' buildpack and save changes. Note: the Python buildpack _must_ be above the NodeJS buildpack.
+  
+<details>
+<summary>Choose Buildpacks</summary>
+<img src ="documentation/readme/heroku_bp.png">
+</details>  
+  
+7. Proceed to the '**Deploy**' tab and select GitHub as the Deployment method.
+8. Search for the repository name, choose the branch you want to build from, and connect it by clicking the '**Connect**' button.
+9. Choose either '**Automatic**' or '**Manual**' deployment options; I selected the 'Automatic' deployment method. Then, click '**Deploy Branch**'.
+10. Once the app's build waiting period is over, click the '**View**' link to access your newly deployed site.
+
+-----  
+
+### Forking the GitHub Repository
+
+A copy of the original repository can be made through GitHub. Please follow the below steps to fork this repository:  
+
+1. Visit GitHub and sign in.
+2. After logging in, access this repository using the following link: [Baker's Heart Repository](https://github.com/Tenda-M/Baker-s_Heart-).
+3. Above the file section of the repository and located at the top right of the page, you'll find the '**Fork**' button. Click on it to create a fork of this repository.
+4. You should now find a forked version of this repository in your GitHub account.
+
+-----  
+
+### Clone this GitHub Repository
+
+A local clone of this repository can be made on GitHub. Please follow the below steps:
+1. Go to GitHub and sign in.
+2. You can find the [Baker's Heart Repository](https://github.com/Tenda-M/Baker-s_Heart-) at this address.
+3. Above the section containing repository files, locate the '**Code**' button.
+4. Click on it and select your preferred cloning method from HTTPS, SSH, or GitHub CLI. Copy the URL to your clipboard using the '**Copy**' button.
+5. Launch your Git Bash Terminal.
+6. Navigate to the directory where you want the cloned directory to be created.
+7. Enter `git clone` followed by pasting the copied URL from step 4.
+8. Hit '**Enter**' to initiate the creation of the local clone.
 
 
 
 
 
 
+
+
+[Back to Top](#baker's Heart)
 
 ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
-
-Welcome,
-
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
-
-## Reminders
-
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
-
-## Creating the Heroku app
-
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
-
-1. `heroku/python`
-2. `heroku/nodejs`
-
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
-
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
-
-Connect your GitHub repository and deploy as normal.
-
-## Constraints
-
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
-
----
-
-Happy coding!
