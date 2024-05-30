@@ -33,16 +33,16 @@ Google Sheets Sales, surplus, stock and Inventory Data (view only) [here.](https
 # User Experience/User Interface (UX/UI)  
   
 ## User Goals
-Accurate Sales Tracking:
-- Enter and view sales data to monitor product performance and identify trends.
-Efficient Inventory Management:
-- Add, view, and update stock data to keep track of inventory levels and ensure adequate stock.
-Surplus Calculation:
-- Calculate and view surplus data to manage waste effectively and optimise production.
-Ingredient Management:
-- Manage the inventory of ingredients by adding new items, updating quantities, and deleting outdated items.
-User-Friendly Interface:
-- Interact with the system through an intuitive command line interface enhanced with ASCII art logos and typing effects for a pleasant user experience.
+1. Accurate Sales Tracking:
+   Enter and view sales data to monitor product performance and identify trends.
+2. Efficient Inventory Management:
+   Add, view, and update stock data to keep track of inventory levels and ensure adequate stock.
+3. Surplus Calculation:
+   Calculate and view surplus data to manage waste effectively and optimise production.
+4. Ingredient Management:
+   Manage the inventory of ingredients by adding new items, updating quantities, and deleting outdated items.
+5. User-Friendly Interface:
+   Interact with the system through an intuitive command line interface enhanced with ASCII art logos and typing effects for a pleasant user experience.
 
 ## User Stories 
 These user stories aim to cover the essential functionalities required for managing the inventory and sales data of Baker's Heart effectively.
@@ -127,7 +127,7 @@ The user data is inputted into the respective Google Sheets worksheets. Each wor
 
 
 - Sales Worksheet: Stores detailed records of all sales data entered by the user, ensuring accurate tracking and analysis of sales performance.
-![Sales data](/documentation/readme/sales_data.png) 
+[Sales data](/documentation/readme/sales_data.png) 
 
 - Stock Worksheet: Maintains current stock levels, allowing for real-time monitoring and management of inventory.
 [Stock data](/documentation/readme/stock_data.png)
@@ -140,6 +140,221 @@ The user data is inputted into the respective Google Sheets worksheets. Each wor
 
 Design Choices
 *****EDIT*******
+
+
+# Features
+
+## How to Use Baker's Heart
+Navigating to the Main Menu and Using Baker's Heart
+
+Navigating to the Main Menu:
+- Start the Application:
+    Launch the Baker's Heart application in your terminal. The program will begin with a welcome screen displaying the Baker's Heart logo and a brief introduction.
+
+    Proceed to the Main Menu:
+    After the welcome screen, you will be directed to the Main Menu. This menu serves as the central hub for navigating the application's features.
+
+### Main Menu 
+
+Using the Main Menu:
+
+The Main Menu presents three primary options, each corresponding to a specific aspect of the Baker's Heart application:
+
+    Sales Menu:
+        Select this option by entering '1' and pressing Enter.
+        This menu allows you to view sales data, add new sales records, and compare sales data with stock levels.
+
+    Ingredients Inventory:
+        Select this option by entering '2' and pressing Enter.
+        Here, you can view the current inventory, manage ingredients (add, delete, or update), and check for low stock alerts.
+
+    Exit:
+        Select this option by entering '3' and pressing Enter.
+        This will terminate the application, displaying a goodbye message before exiting.
+
+    ![Main Menu screenshot](/documentation/readme/main_menu.png) 
+
+### Sales Menu 
+
+Sales Menu:
+
+1. View Sales Data: Displays and edit sales data in a tabulated format.
+2. Add Stock Data: Displays and edit sales data in a tabulated format.
+3. View Sales vs Stock: Compares sales data with stock levels, calculating and displaying any surplus.
+4. Return to main menu:
+
+![Sales menu screenshot](/documentation/readme/sales_menu.png)
+
+### Using the sales menu
+        
+At the Main Menu, type '1' and press Enter to navigate to the Sales Menu.
+The Sales Menu provides several options for managing and viewing your sales data:
+
+   #### View Sales Data Menu
+        Select this option by entering '1' and pressing Enter.
+        This menu provides sub-options menu view, add, and return to sales data menu.
+        ![View Sales Data Menu screenshot](/documentation/readme/sales_data_menu.png)
+
+    1. View sales data:
+        This will display the current sales data in a tabulated format, showing details such as item names, quantities sold, and dates.
+        ![View sales data screenshot](/documentation/readme/sales_cake_data.png)
+
+        After viewing the sales data, you will have the option to add new sales data.
+            If you choose to add new sales data, you will be prompted to enter sales figures for five items followed by a date (e.g., 10,20,30,40,50,01/01/2024).
+            The new sales data will be added to the sales worksheet, and you will return to the Sales Data Menu.
+            Press Enter to return to the Sales Data Menu after viewing the sales data.
+            ![Add Sales Data screenshot](/documentation/readme/add_cake_data.png)
+
+    2. Add Sales Data:
+        Select this option by entering '2' and pressing Enter.
+        You will be prompted to enter sales figures for five items followed by a date (e.g., 10,20,30,40,50,01/01/2024).
+        The new sales data will be validated and added to the sales worksheet.
+        After successfully adding the sales data, you will return to the Sales Data Menu.
+        ![Add Sales Data screenshot](/documentation/readme/add_cake_data.png)
+    
+    3. Return to sales data menu:
+       Select this option by entering '3' and pressing Enter.
+        This will take you back to the sales data Menu.
+
+   #### View Stock Data Menu
+    In the Sales Menu, type '2' and press Enter to view the stock data.
+    This menu provides sub-options menu view, add, and return to stock data menu.
+    ![View Stock Data Menu screenshot](/documentation/readme/stock_data_menu.png)
+
+    1. Viewing Current Stock Data:
+    Once you select to view the stock data, the application will display the current stock data in a neatly formatted table. The table will show details such as item names and quantities in stock.
+    ![Viewing Current Stock screenshot](/documentation/readme/stock_cake_data.png)
+ 
+    After viewing the stock data, you will be prompted with an option to add new stock data.
+    If you wish to add new stock data, type 'y' and press Enter. If you do not wish to add new stock data, type 'n' and press Enter to return to the Stock Data Menu.
+    ![Adding New Stock Data screenshot](/documentation/readme/add_stock_data.png)
+
+    2. Adding New Stock Data:
+
+    If you choose to add new stock data, you will be prompted to enter stock figures for five items followed by a date.
+    Enter the data in the following format: quantity1,quantity2,quantity3,quantity4,quantity5,date (e.g., 100,200,300,400,500,01/01/2024).
+    ![Adding New Stock Data screenshot](/documentation/readme/add_stock_data.png)
+
+   3. Returning to the Stock Data Menu:
+
+    After successfully adding the new stock data, you will be returned to the Stock Data Menu.
+    Press Enter to return to the Stock Data Menu after viewing or adding stock data.
+
+  #### View Sales vs Stock Menu
+    View Sales vs Stock:
+        Select this option by entering '3' and pressing Enter.
+        This option compares sales data with stock data to calculate surplus for matching dates.
+        The surplus data will be displayed in a tabulated format, showing the difference between stock and sales for each item on matching dates.
+        If no matching dates are found, an appropriate message will be displayed.
+        Press Enter to return to the Sales Menu after viewing the sales vs stock data.
+    ![View Sales vs Stock screenshot](/documentation/readme/sales_vs_stock.png)
+
+    Return to Main Menu:
+        Select this option by entering '4' and pressing Enter.
+        This will take you back to the Main Menu.
+
+### Ingredients Inventory Menu
+
+Ingredients Inventory:
+
+View Inventory: Shows the current inventory list with ingredient names and quantities.
+Manage Inventory: Provides sub-options to add, delete, or update ingredients.
+1. View Inventory: Inventory is displayed.
+2. Manage Inventory : Modify the inventory.
+3. Return to main menu:
+![Ingredients Inventory menu screenshot](/documentation/readme/inventory_menu.png)
+
+### Using Ingredients Inventory menu
+
+#### View Inventory:
+Select this option by entering '1' and pressing Enter.
+This will display the current inventory list, showing ingredient names and quantities in a tabulated format.
+Press Enter to return to the Inventory Menu after viewing the inventory.
+![Inventory display screenshot](/documentation/readme/inventory_data.png)
+
+#### Manage Inventory:
+Select this option by entering '2' and pressing Enter.
+This menu provides sub-options menu to add, delete, or update ingredients in your inventory.
+![Manage Inventory manu screenshot](/documentation/readme/manage_inventory.png)
+
+    1. Add New Ingredient:
+            Enter '1' to add a new ingredient.
+            You will be prompted to enter the name of the new ingredient. Ensure the name contains only alphabetic characters and allowed symbols ((), []).
+            Next, enter the quantity of the new ingredient as a number.
+            The new ingredient will be added to the inventory, and the updated inventory list will be displayed.
+            You can choose to add another ingredient or return to the Manage Inventory menu.
+            [Add New Ingredient screenshot](/documentation/readme/add_ingredient.png)
+
+    2. Delete Ingredient:
+            Enter '2' to delete an ingredient.
+            You will be prompted to enter the name of the ingredient you wish to delete.
+            If the ingredient is found, it will be removed from the inventory, and the updated inventory list will be displayed.
+            If the ingredient is not found, an alert will be displayed, and you will be prompted to try again.
+            You can choose to delete another ingredient or return to the Manage Inventory menu.
+            [Delete Ingredient screenshot](/documentation/readme/delete_ingredient.png)
+
+    3. Update Ingredient Name or Quantity:
+            Enter '3' to update an ingredient.
+            You will be prompted to enter the name of the ingredient you wish to update.
+            If the ingredient is found, you can enter a new name (or leave blank to keep the current name) and a new quantity (or leave blank to keep the current quantity).
+            The ingredient details will be updated, and the updated inventory list will be displayed.
+            If the ingredient is not found, an alert will be displayed, and you will be prompted to try again.
+            You can choose to update another ingredient or return to the Manage Inventory menu.
+            [Update Ingredient screenshot](/documentation/readme/update_ingredient.png)
+
+#### Return to Main Menu:
+    Select this option by entering '3' and pressing Enter.
+    This will take you back to the Main Menu.
+
+### Using Exit:
+        Selecting this option will end the application. Ensure you have saved any changes before exiting.
+
+By following these steps, you can effectively navigate and utilize the Baker's Heart application to manage sales and inventory efficiently.
+
+### Error Handling and Clear 
+
+    Input Validation:
+        The program extensively validates user input to ensure it meets the required format and criteria.
+        For instance, when entering sales data, the program checks if the input contains five numbers followed by a date in the correct format. If the input is invalid, an error message is displayed, and the user is prompted to try again.
+        [Invalid data screenshot](/documentation/readme/invalid_data.png)
+
+    Try/Except Blocks:
+        The program uses try/except blocks to handle potential errors gracefully. For example, when converting input values to integers, if the conversion fails, the program catches the error and provides a clear error message to the user.
+
+    Clear Error Messages:
+        Whenever an error occurs, the program provides clear and specific error messages. This helps users understand what went wrong and how to correct their input.
+        [Invalid option screenshot](/documentation/readme/invalid_option.png)
+
+   Clear Screen Function:
+    The clearScreen() function is used to clear the terminal screen before displaying new content. This helps maintain a clean and organized display, making it easier for users to focus on the current task.
+    The function is called at the beginning of each menu or sub-menu to ensure that previous outputs and inputs are cleared.
+
+-----  
+
+<br>
+
+## Future Features  
+
+Batch Management and Tracking:
+Introduce batch management features to track production batches, expiry dates, and batch-specific sales.
+
+Inventory Alerts and Notifications:
+ Add automated alerts and notifications for low stock levels, upcoming expiration dates, or reorder points. Allow users to set custom thresholds for notifications, ensuring timely restocking and reducing waste.
+
+Enhanced Reporting and Analytics:
+Introduce detailed reporting features that generate visual charts and graphs for sales, stock levels, and inventory trends.
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨¨
