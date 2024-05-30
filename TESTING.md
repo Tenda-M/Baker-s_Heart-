@@ -53,7 +53,7 @@ In Baker's Heart, robust user input validation ensures data integrity and a seam
 ----- 
 
 ## Browser Testing 
-BakeStock was tested on the Heroku app website across multiple browsers, including Google Chrome, Mozilla Firefox, and Safari, without encountering any issues.
+Baker's Heart was tested on the Heroku app website across multiple browsers, including Google Chrome, Mozilla Firefox, and Safari, without encountering any issues.
 
 ## Manual Testing  
 
